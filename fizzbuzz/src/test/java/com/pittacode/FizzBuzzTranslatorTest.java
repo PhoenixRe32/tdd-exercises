@@ -1,17 +1,19 @@
 package com.pittacode;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class FizzBuzzTranslatorTest {
 
-    @Test
-    void whenTranslatingNumber_returnNumber() {
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 4, 7, 8, 11, 13, 14})
+    void whenTranslatingNumber_returnNumber(int i) {
         var underTest = new FizzBuzzTranslator();
 
-        var result = underTest.translate(1);
+        var result = underTest.translate(i);
 
-        assertThat(result).isEqualTo("1");
+        assertThat(result).isEqualTo(String.valueOf(i));
     }
 }

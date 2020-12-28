@@ -3,6 +3,6 @@ package com.pittacode;
 public class FizzBuzzTranslator {
 
     public String translate(int input) {
-        return "1";
+        return String.valueOf(input);
     }
 }
