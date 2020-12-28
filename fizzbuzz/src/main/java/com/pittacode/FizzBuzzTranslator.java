@@ -2,24 +2,35 @@ package com.pittacode;
 
 public class FizzBuzzTranslator {
 
+    private static final String BUZZ = "Buzz";
+    private static final String FIZZ = "Fizz";
+
     public String translate(int input) {
 
         if (input < 1) {
             throw new IllegalArgumentException("Doesn't accept zero or negative values");
         }
 
-        if (input % 15 == 0) {
-            return "FizzBuzz";
+        if (isDivisibleBy3(input) && isDivisibleBy5(input)) {
+            return FIZZ + BUZZ;
         }
 
-        if (input % 5 == 0) {
-            return "Buzz";
+        if (isDivisibleBy5(input)) {
+            return BUZZ;
         }
 
-        if (input % 3 == 0) {
-            return "Fizz";
+        if (isDivisibleBy3(input)) {
+            return FIZZ;
         }
 
         return String.valueOf(input);
+    }
+
+    private boolean isDivisibleBy3(int input) {
+        return input % 3 == 0;
+    }
+
+    private boolean isDivisibleBy5(int input) {
+        return input % 5 == 0;
     }
 }
