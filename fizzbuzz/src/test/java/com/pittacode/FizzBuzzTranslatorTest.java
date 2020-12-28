@@ -16,4 +16,14 @@ class FizzBuzzTranslatorTest {
 
         assertThat(result).isEqualTo(String.valueOf(i));
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {3, 6, 9, 12, 18, 21, 24, 27})
+    void whenTranslatingMultipleOf3_returnFizz(int i) {
+        var underTest = new FizzBuzzTranslator();
+
+        var result  = underTest.translate(i);
+
+        assertThat(result).isEqualTo("Fizz");
+    }
 }
