@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class FizzBuzzTranslatorTest {
 
@@ -47,4 +48,11 @@ class FizzBuzzTranslatorTest {
 
         assertThat(result).isEqualTo("FizzBuzz");
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -3, -15})
+    void whenTranslatingZeroAndNegative_throw(int i) {
+        assertThatThrownBy(() -> underTest.translate(i)).isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
