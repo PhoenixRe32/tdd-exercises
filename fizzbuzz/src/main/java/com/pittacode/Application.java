@@ -1,6 +1,11 @@
 package com.pittacode;
 
+import java.util.stream.IntStream;
+
 public class Application {
+
+    private static final int START_INCLUSIVE = 1;
+    private static final int END_EXCLUSIVE = 101;
 
     private final FizzBuzzTranslator fizzBuzzTranslator;
 
@@ -9,8 +14,8 @@ public class Application {
     }
 
     public void run() {
-        for (int i = 1; i<=100; i++) {
-            System.out.println(fizzBuzzTranslator.translate(i));
-        }
+        IntStream.range(START_INCLUSIVE, END_EXCLUSIVE)
+                 .mapToObj(fizzBuzzTranslator::translate)
+                 .forEach(System.out::println);
     }
 }
