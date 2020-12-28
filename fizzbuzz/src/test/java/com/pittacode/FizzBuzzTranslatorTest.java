@@ -26,4 +26,15 @@ class FizzBuzzTranslatorTest {
 
         assertThat(result).isEqualTo("Fizz");
     }
+
+
+    @ParameterizedTest
+    @ValueSource(ints = {5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55})
+    void whenTranslatingMultipleOf5_returnBuzz(int i) {
+        var underTest = new FizzBuzzTranslator();
+
+        var result  = underTest.translate(i);
+
+        assertThat(result).isEqualTo("Buzz");
+    }
 }
