@@ -29,7 +29,7 @@ class FizzBuzzTranslatorTest {
 
 
     @ParameterizedTest
-    @ValueSource(ints = {5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55})
+    @ValueSource(ints = {5, 10, 20, 25, 35, 40, 50, 55})
     void whenTranslatingMultipleOf5_returnBuzz(int i) {
         var underTest = new FizzBuzzTranslator();
 
