@@ -9,6 +9,8 @@ public class Application {
     }
 
     public void run() {
-
+        for (int i = 1; i<=100; i++) {
+            System.out.println(fizzBuzzTranslator.translate(1));
+        }
     }
 }
