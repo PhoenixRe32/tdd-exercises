@@ -23,6 +23,19 @@ public class Greeter {
     }
 
     public String greet(String[] names) {
-        return format("Hello, %s and %s.", names[0], names[1]);
+        if (names.length == 2) {
+            return format("Hello, %s and %s.", names[0], names[1]);
+        }
+
+        var greetingBuilder = new StringBuilder("Hello, ");
+        for (int i = 0; i < names.length - 1; i++) {
+            greetingBuilder.append(names[i]);
+            greetingBuilder.append(", ");
+        }
+        greetingBuilder.append("and ");
+        greetingBuilder.append(names[names.length - 1]);
+        greetingBuilder.append(".");
+
+        return greetingBuilder.toString();
     }
 }
