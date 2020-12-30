@@ -6,6 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.stream.Collectors;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GreeterTest {
@@ -30,5 +32,12 @@ public class GreeterTest {
         var result = underTest.greet(noName);
 
         assertThat(result).isEqualTo("Hello, my friend.");
+    }
+
+    @Test
+    void whenNameInCaps_greetShouting() {
+        var result = underTest.greet("ANTONIS");
+
+        assertThat(result).isEqualTo("HELLO, ANTONIS.");
     }
 }
