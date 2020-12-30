@@ -40,4 +40,12 @@ public class GreeterTest {
 
         assertThat(result).isEqualTo("HELLO, ANTONIS.");
     }
+
+
+    @Test
+    void whenNameWithNonLettersInCaps_greetShouting() {
+        var result = underTest.greet("ANNA-MARIA");
+
+        assertThat(result).isEqualTo("HELLO, ANNA-MARIA.");
+    }
 }
