@@ -36,9 +36,9 @@ public class GreeterTest {
 
     @Test
     void whenNameInCaps_greetShouting() {
-        var result = underTest.greet("ANTONIS");
+        var result = underTest.greet("ANTONI");
 
-        assertThat(result).isEqualTo("HELLO, ANTONIS.");
+        assertThat(result).isEqualTo("HELLO, ANTONI.");
     }
 
 
@@ -47,5 +47,12 @@ public class GreeterTest {
         var result = underTest.greet("ANNA-MARIA");
 
         assertThat(result).isEqualTo("HELLO, ANNA-MARIA.");
+    }
+
+    @Test
+    void whenTwoNamesArePassed_greetBothNames() {
+        var result = underTest.greet(new String[]{"Antoni", "Anna-Maria"});
+
+        assertThat(result).isEqualTo("Hello, Antoni and Anna-Maria.");
     }
 }
