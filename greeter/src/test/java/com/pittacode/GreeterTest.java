@@ -62,4 +62,11 @@ public class GreeterTest {
 
         assertThat(result).isEqualTo("Hello, Antoni, Anna-Maria, and Chloi.");
     }
+
+    @Test
+    void whenMixedCaseNamesArePassed_greetNormallyAndWithShoutsSeperately() {
+        var result = underTest.greet(new String[]{"Antoni", "Anna-Maria", "CHLOI"});
+
+        assertThat(result).isEqualTo("Hello, Antoni and Anna-Maria. AND HELLO CHLOI.");
+    }
 }
