@@ -4,16 +4,25 @@ import static java.lang.String.format;
 
 public class Greeter {
 
+    public String greet() {
+        return "Hello, my friend.";
+    }
+
     public String greet(String name) {
-        if (name == null || name.isEmpty()) {
-            return "Hello, my friend.";
+        if (isEmpty(name)) {
+            return greet();
         }
 
-        var greeting = format("Hello, %s.", name);
+        var greetingBuilder = new StringBuilder("Hello, ");
+
 
         return isUpperCase(name)
-                ? greeting.toUpperCase()
-                : greeting;
+                ? greetingBuilder.append(name).append("!").toString().toUpperCase()
+                : greetingBuilder.append(name).append(".").toString();
+    }
+
+    private boolean isEmpty(String name) {
+        return name == null || name.isEmpty();
     }
 
     private boolean isUpperCase(String name) {

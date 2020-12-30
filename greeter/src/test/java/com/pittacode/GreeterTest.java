@@ -38,7 +38,7 @@ public class GreeterTest {
     void whenNameInCaps_greetShouting() {
         var result = underTest.greet("ANTONI");
 
-        assertThat(result).isEqualTo("HELLO, ANTONI.");
+        assertThat(result).isEqualTo("HELLO, ANTONI!");
     }
 
 
@@ -46,7 +46,7 @@ public class GreeterTest {
     void whenNameWithNonLettersInCaps_greetShouting() {
         var result = underTest.greet("ANNA-MARIA");
 
-        assertThat(result).isEqualTo("HELLO, ANNA-MARIA.");
+        assertThat(result).isEqualTo("HELLO, ANNA-MARIA!");
     }
 
     @Test
