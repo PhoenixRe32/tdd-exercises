@@ -17,8 +17,8 @@ public class Greeter {
     }
 
     private boolean isUpperCase(String name) {
-        return name.chars()
+        return name.codePoints()
                    .mapToObj(i -> (char) i)
-                   .allMatch(Character::isUpperCase);
+                   .allMatch(ch -> !Character.isLetter(ch) || Character.isUpperCase(ch));
     }
 }
