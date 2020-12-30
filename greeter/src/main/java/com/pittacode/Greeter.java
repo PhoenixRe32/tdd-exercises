@@ -21,4 +21,8 @@ public class Greeter {
                    .mapToObj(i -> (char) i)
                    .allMatch(ch -> !Character.isLetter(ch) || Character.isUpperCase(ch));
     }
+
+    public String greet(String[] names) {
+        return format("Hello, %s and %s.", names[0], names[1]);
+    }
 }
