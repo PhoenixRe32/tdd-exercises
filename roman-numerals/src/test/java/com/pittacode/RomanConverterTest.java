@@ -44,4 +44,10 @@ class RomanConverterTest {
         var result = converter.convert("L");
         assertThat(result).isEqualTo(50);
     }
+
+    @Test
+    void Cequals100() {
+        var result = converter.convert("C");
+        assertThat(result).isEqualTo(100);
+    }
 }
