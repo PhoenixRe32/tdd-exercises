@@ -1,7 +1,5 @@
 package com.pittacode.greeters;
 
-import static java.lang.String.format;
-
 public class ShoutingGreeter implements Greeter {
 
     private final String[] names;
@@ -24,22 +22,14 @@ public class ShoutingGreeter implements Greeter {
             return buildGreeting(names[0]);
         }
 
-        if (names.length == 2) {
-            return buildGreeting(names[0], names[1]);
-        }
-
-        return buildGreetingFor3OrMore(names);
+        return buildGreetingForMultiplePeople(names);
     }
 
     private String buildGreeting(String name) {
         return "HELLO " + name + "!";
     }
 
-    private String buildGreeting(String name1, String name2) {
-        return format("HELLO %s AND %s.", name1, name2);
-    }
-
-    private String buildGreetingFor3OrMore(String[] names) {
+    private String buildGreetingForMultiplePeople(String[] names) {
         var greetingBuilder = new StringBuilder("HELLO ");
         for (int i = 0; i < names.length - 1; i++) {
             greetingBuilder.append(names[i]);
