@@ -22,4 +22,13 @@ class RomanConverterTest {
 
         assertThat(result).isEqualTo(1);
     }
+
+    @Test
+    void Vequals5() {
+        var converter = new RomanConverter();
+
+        var result = converter.convert("V");
+
+        assertThat(result).isEqualTo(5);
+    }
 }
