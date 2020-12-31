@@ -73,4 +73,11 @@ public class GreeterTest {
 
         assertThat(result).isEqualTo("Hello, Antoni, Anna-Maria, and Chloi.");
     }
+
+    @Test
+    void whenNameIsCommaSeperatedButInQuotes_treatAsOneName() {
+        var result = underTest.buildGreeting(new String[]{"Antoni", "\"Anna-Maria, Chloi\""});
+
+        assertThat(result).isEqualTo("Hello, Antoni and Anna-Maria, Chloi.");
+    }
 }
