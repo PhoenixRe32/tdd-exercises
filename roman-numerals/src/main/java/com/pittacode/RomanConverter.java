@@ -4,6 +4,7 @@ public class RomanConverter {
 
     private static final String I = "I";
     private static final String V = "V";
+    private static final String X = "X";
 
     public int convert(String romanNumber) {
         if (romanNumber.equals(I)) {
@@ -12,6 +13,10 @@ public class RomanConverter {
 
         if (romanNumber.equals(V)) {
             return 5;
+        }
+
+        if (romanNumber.equals(X)) {
+            return 10;
         }
 
         return -1;
