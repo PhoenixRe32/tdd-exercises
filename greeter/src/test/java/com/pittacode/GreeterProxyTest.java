@@ -7,13 +7,13 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GreeterTest {
+public class GreeterProxyTest {
 
-    private Greeter underTest;
+    private GreeterProxy underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new Greeter();
+        underTest = new GreeterProxy();
     }
 
     @Test

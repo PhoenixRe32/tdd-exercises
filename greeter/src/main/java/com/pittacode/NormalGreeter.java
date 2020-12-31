@@ -2,7 +2,7 @@ package com.pittacode;
 
 import static java.lang.String.format;
 
-public class NormalGreeter {
+public class NormalGreeter implements Greeter {
 
     private final String[] names;
 
@@ -14,6 +14,7 @@ public class NormalGreeter {
         this(new String[]{name});
     }
 
+    @Override
     public String buildGreeting() {
         if (names.length == 0) {
             return "";
