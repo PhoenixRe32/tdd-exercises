@@ -14,13 +14,19 @@ public class NameDifferentiator {
 
     public String[] getShoutedNames() {
         return Arrays.stream(names)
-                     .filter(NameUtils::isShoutedName)
+                     .filter(this::isShoutedName)
                      .toArray(String[]::new);
     }
 
     public String[] getNormalNames() {
         return Arrays.stream(names)
-                     .filter(not(NameUtils::isShoutedName))
+                     .filter(not(this::isShoutedName))
                      .toArray(String[]::new);
+    }
+
+    private boolean isShoutedName(String name) {
+        return name.codePoints()
+                   .mapToObj(i -> (char) i)
+                   .allMatch(ch -> !Character.isLetter(ch) || Character.isUpperCase(ch));
     }
 }

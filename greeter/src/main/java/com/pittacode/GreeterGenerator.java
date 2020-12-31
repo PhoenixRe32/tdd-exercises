@@ -1,8 +1,6 @@
 package com.pittacode;
 
-import static com.pittacode.NameUtils.isShoutedName;
-
-public class GreeterProxy {
+public class GreeterGenerator {
 
     public String buildGreeting(String[] names) {
         String[] processedNames = new NameInputProcessor().process(names);
@@ -21,9 +19,7 @@ public class GreeterProxy {
             return new GenericGreeter().buildGreeting();
         }
 
-        return isShoutedName(name)
-                ? new ShoutingGreeter(name).buildGreeting()
-                : new NormalGreeter(name).buildGreeting();
+        return buildGreeting(new String[]{name});
     }
 
     private boolean isEmpty(String name) {
