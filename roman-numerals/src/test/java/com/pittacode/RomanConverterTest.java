@@ -18,7 +18,7 @@ class RomanConverterTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"A", "B", "E", "F", "G", "H", "J", "K", "N", "O", "P", "Q", "R", "S", "T", "U", "W", "X", "Y", "Z"})
+    @ValueSource(strings = {"A", "B", "E", "F", "G", "H", "J", "K", "N", "O", "P", "Q", "R", "S", "T", "U", "W", "Y", "Z"})
     void whenPasssingInvalidCharacter_throwException(String input) {
         assertThatThrownBy(() -> converter.convert(input)).isInstanceOf(IllegalArgumentException.class);
     }

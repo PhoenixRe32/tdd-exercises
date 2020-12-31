@@ -6,8 +6,9 @@ public class RomanConverter {
     private static final String V = "V";
     private static final String X = "X";
     private static final String L = "L";
-    public static final String C = "C";
-    public static final String D = "D";
+    private static final String C = "C";
+    private static final String D = "D";
+    private static final String M = "M";
 
     public int convert(String romanNumber) {
         if (romanNumber.equals(I)) {
@@ -34,6 +35,10 @@ public class RomanConverter {
             return 500;
         }
 
-        return -1;
+        if (romanNumber.equals(M)) {
+            return 1000;
+        }
+
+        throw new IllegalArgumentException(romanNumber + " is not a roman numeral.");
     }
 }
