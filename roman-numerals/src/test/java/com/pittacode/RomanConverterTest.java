@@ -50,4 +50,10 @@ class RomanConverterTest {
         var result = converter.convert("C");
         assertThat(result).isEqualTo(100);
     }
+
+    @Test
+    void Dequals500() {
+        var result = converter.convert("D");
+        assertThat(result).isEqualTo(500);
+    }
 }
