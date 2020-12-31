@@ -52,6 +52,7 @@ public class NormalGreeter implements Greeter {
         return greetingBuilder.toString();
     }
 
+    @Override
     public boolean isEmpty() {
         return names.length == 0;
     }

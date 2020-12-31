@@ -9,13 +9,10 @@ public class GreeterProxy {
     public String buildGreeting(String[] names) {
         String[] splitNames = splitAnyCommaSeparatedEntriesToSingleNames(names);
 
-        var nameDifferentiator = new NameDifferentiator(splitNames);
+        var greeterFactory = new GreeterFactory(splitNames);
 
-        var shoutedNames = nameDifferentiator.getNormalNames();
-        var normalNames = nameDifferentiator.getShoutedNames();
-
-        var normalGreeter = new NormalGreeter(normalNames);
-        var shoutingGreeter = new ShoutingGreeter(shoutedNames);
+        var normalGreeter = greeterFactory.getNormalGreeter();
+        var shoutingGreeter = greeterFactory.getShoutingGreeter();
 
         return new GreeterJoiner(normalGreeter, shoutingGreeter).joinGreetings();
     }

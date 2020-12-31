@@ -2,10 +2,10 @@ package com.pittacode;
 
 public class GreeterJoiner {
 
-    private final NormalGreeter normalGreeter;
-    private final ShoutingGreeter shoutingGreeter;
+    private final Greeter normalGreeter;
+    private final Greeter shoutingGreeter;
 
-    public GreeterJoiner(NormalGreeter normalGreeter, ShoutingGreeter shoutingGreeter) {
+    public GreeterJoiner(Greeter normalGreeter, Greeter shoutingGreeter) {
         this.normalGreeter = normalGreeter;
         this.shoutingGreeter = shoutingGreeter;
     }
