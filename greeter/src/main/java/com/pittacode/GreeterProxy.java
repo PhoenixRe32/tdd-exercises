@@ -1,15 +1,13 @@
 package com.pittacode;
 
-import static com.pittacode.NameUtils.isEmptyName;
 import static com.pittacode.NameUtils.isShoutedName;
-import static com.pittacode.NameUtils.splitAnyCommaSeparatedEntriesToSingleNames;
 
 public class GreeterProxy {
 
     public String buildGreeting(String[] names) {
-        String[] splitNames = splitAnyCommaSeparatedEntriesToSingleNames(names);
+        String[] processedNames = new NameInputProcessor().process(names);
 
-        var greeterFactory = new GreeterFactory(splitNames);
+        var greeterFactory = new GreeterFactory(processedNames);
 
         var normalGreeter = greeterFactory.getNormalGreeter();
         var shoutingGreeter = greeterFactory.getShoutingGreeter();
@@ -19,12 +17,16 @@ public class GreeterProxy {
 
 
     public String buildGreeting(String name) {
-        if (isEmptyName(name)) {
+        if (isEmpty(name)) {
             return new GenericGreeter().buildGreeting();
         }
 
         return isShoutedName(name)
                 ? new ShoutingGreeter(name).buildGreeting()
                 : new NormalGreeter(name).buildGreeting();
+    }
+
+    private boolean isEmpty(String name) {
+        return name == null || name.isEmpty();
     }
 }
