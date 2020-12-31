@@ -8,10 +8,12 @@ import static java.util.function.Predicate.not;
 public class Greeter {
 
     public String buildGreeting(String[] names) {
-        var shoutedNames = Arrays.stream(names)
+        String[] splitNames = splitAnyCommaSeparatedEntriesToSingleNames(names);
+
+        var shoutedNames = Arrays.stream(splitNames)
                                  .filter(this::isUpperCase)
                                  .toArray(String[]::new);
-        var normalNames = Arrays.stream(names)
+        var normalNames = Arrays.stream(splitNames)
                                 .filter(not(this::isUpperCase))
                                 .toArray(String[]::new);
 
@@ -19,6 +21,13 @@ public class Greeter {
         var shoutedGreeting = buildShoutedGreeting(shoutedNames);
 
         return joinGreetings(normalGreeting, shoutedGreeting);
+    }
+
+    private String[] splitAnyCommaSeparatedEntriesToSingleNames(String[] names) {
+        return Arrays.stream(names)
+                     .map(name -> name.split(","))
+                     .flatMap(name -> Arrays.stream(name.clone()).map(String::trim))
+                     .toArray(String[]::new);
     }
 
     private String joinGreetings(String normalGreeting, String shoutedGreeting) {
