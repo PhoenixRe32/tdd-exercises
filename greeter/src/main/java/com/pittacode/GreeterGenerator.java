@@ -11,10 +11,10 @@ public class GreeterGenerator {
     public String buildGreeting(String[] names) {
         String[] processedNames = nameInputProcessor.process(names);
 
-        var greeterFactory = new GreeterFactory(processedNames);
+        var nameDifferentiator = new NameDifferentiator(processedNames);
 
-        var normalGreeter = greeterFactory.getNormalGreeter();
-        var shoutingGreeter = greeterFactory.getShoutingGreeter();
+        var normalGreeter = new NormalGreeter(nameDifferentiator.getNormalNames());
+        var shoutingGreeter = new ShoutingGreeter(nameDifferentiator.getShoutedNames());
 
         return new GreeterJoiner(normalGreeter, shoutingGreeter).joinGreetings();
     }
