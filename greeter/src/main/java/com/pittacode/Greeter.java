@@ -17,10 +17,10 @@ public class Greeter {
                                 .filter(not(this::isUpperCase))
                                 .toArray(String[]::new);
 
-        var normalGreeting = buildNormalGreeting(normalNames);
-        var shoutedGreeting = buildShoutedGreeting(shoutedNames);
+        var normalGreeter = new NormalGreeter(normalNames);
+        var shoutingGreeter = new ShoutingGreeter(shoutedNames);
 
-        return joinGreetings(normalGreeting, shoutedGreeting);
+        return new GreeterJoiner(normalGreeter, shoutingGreeter).joinGreetings();
     }
 
     private String[] splitAnyCommaSeparatedEntriesToSingleNames(String[] names) {
@@ -44,107 +44,14 @@ public class Greeter {
         return name.substring(1, name.length() - 1);
     }
 
-    private String joinGreetings(String normalGreeting, String shoutedGreeting) {
-        var greetingBuilder = new StringBuilder(normalGreeting);
-        if (areWeGreetingBothNormallAndShouting(normalGreeting, shoutedGreeting)) {
-            greetingBuilder.append(" AND ");
-        }
-        greetingBuilder.append(shoutedGreeting);
-
-        return greetingBuilder.toString();
-    }
-
-    private boolean areWeGreetingBothNormallAndShouting(String normalGreeting, String shoutedGreeting) {
-        return !normalGreeting.isEmpty() && !shoutedGreeting.isEmpty();
-    }
-
-    private String buildNormalGreeting(String[] names) {
-        if (names.length == 0) {
-            return "";
-        }
-
-        if (names.length == 1) {
-            return buildNormalGreeting(names[0]);
-        }
-
-        if (names.length == 2) {
-            return buildNormalGreeting(names[0], names[1]);
-        }
-
-        return buildNormalGreetingFor3OrMore(names);
-    }
-
-    private String buildNormalGreeting(String name) {
-        return "Hello, " + name + ".";
-    }
-
-    private String buildNormalGreeting(String name1, String name2) {
-        return format("Hello, %s and %s.", name1, name2);
-    }
-
-    private String buildNormalGreetingFor3OrMore(String[] names) {
-        var greetingBuilder = new StringBuilder("Hello, ");
-        for (int i = 0; i < names.length - 1; i++) {
-            greetingBuilder.append(names[i]);
-            greetingBuilder.append(", ");
-        }
-        greetingBuilder.append("and ");
-        greetingBuilder.append(names[names.length - 1]);
-        greetingBuilder.append(".");
-
-        return greetingBuilder.toString();
-    }
-
     public String buildGreeting(String name) {
         if (isEmpty(name)) {
-            return buildGenericGreeting();
+            return new GenericGreeter().buildGreeting();
         }
-
 
         return isUpperCase(name)
-                ? buildShoutedGreeting(name)
-                : buildNormalGreeting(name);
-    }
-
-    private String buildGenericGreeting() {
-        return "Hello, my friend.";
-    }
-
-    private String buildShoutedGreeting(String[] names) {
-        if (names.length == 0) {
-            return "";
-        }
-
-        if (names.length == 1) {
-            return buildShoutedGreeting(names[0]);
-        }
-
-        if (names.length == 2) {
-            return buildShoutedGreeting(names[0], names[1]);
-        }
-
-        return buildShoutedGreetingFor3OrMore(names);
-    }
-
-    private String buildShoutedGreeting(String name) {
-        return "HELLO " + name + "!";
-    }
-
-    private String buildShoutedGreeting(String name1, String name2) {
-        return format("HELLO %s AND %s.", name1, name2);
-    }
-
-    private String buildShoutedGreetingFor3OrMore(String[] names) {
-        var greetingBuilder = new StringBuilder("HELLO ");
-        for (int i = 0; i < names.length - 1; i++) {
-            greetingBuilder.append(names[i]);
-            greetingBuilder.append(" AND ");
-        }
-        greetingBuilder.append(" AND ");
-        greetingBuilder.append(names[names.length - 1]);
-        greetingBuilder.append(".");
-
-        return greetingBuilder.toString();
+                ? new ShoutingGreeter(name).buildGreeting()
+                : new NormalGreeter(name).buildGreeting();
     }
 
     private boolean isEmpty(String name) {
