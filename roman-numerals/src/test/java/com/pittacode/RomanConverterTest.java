@@ -31,4 +31,13 @@ class RomanConverterTest {
 
         assertThat(result).isEqualTo(5);
     }
+
+    @Test
+    void Xequals10() {
+        var converter = new RomanConverter();
+
+        var result = converter.convert("X");
+
+        assertThat(result).isEqualTo(10);
+    }
 }
