@@ -13,7 +13,8 @@ public class GreeterGeneratorTest {
 
     @BeforeEach
     void setUp() {
-        underTest = new GreeterGenerator();
+        var nameInputProcessor = new NameInputProcessor();
+        underTest = new GreeterGenerator(nameInputProcessor);
     }
 
     @Test

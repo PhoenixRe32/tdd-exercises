@@ -2,8 +2,14 @@ package com.pittacode;
 
 public class GreeterGenerator {
 
+    private final NameInputProcessor nameInputProcessor;
+
+    public GreeterGenerator(NameInputProcessor nameInputProcessor) {
+        this.nameInputProcessor = nameInputProcessor;
+    }
+
     public String buildGreeting(String[] names) {
-        String[] processedNames = new NameInputProcessor().process(names);
+        String[] processedNames = nameInputProcessor.process(names);
 
         var greeterFactory = new GreeterFactory(processedNames);
 
