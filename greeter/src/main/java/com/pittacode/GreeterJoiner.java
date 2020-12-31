@@ -1,16 +1,18 @@
 package com.pittacode;
 
-public class GreeterJoiner {
+import com.pittacode.greeters.Greeter;
+
+class GreeterJoiner {
 
     private final Greeter normalGreeter;
     private final Greeter shoutingGreeter;
 
-    public GreeterJoiner(Greeter normalGreeter, Greeter shoutingGreeter) {
+    GreeterJoiner(Greeter normalGreeter, Greeter shoutingGreeter) {
         this.normalGreeter = normalGreeter;
         this.shoutingGreeter = shoutingGreeter;
     }
 
-    public String joinGreetings() {
+    String joinGreetings() {
         var normalGreeting = normalGreeter.buildGreeting();
         var shoutedGreeting = shoutingGreeter.buildGreeting();
 

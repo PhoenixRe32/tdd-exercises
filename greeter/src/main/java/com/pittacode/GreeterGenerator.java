@@ -1,5 +1,9 @@
 package com.pittacode;
 
+import com.pittacode.greeters.GenericGreeter;
+import com.pittacode.greeters.NormalGreeter;
+import com.pittacode.greeters.ShoutingGreeter;
+
 public class GreeterGenerator {
 
     private final NameInputProcessor nameInputProcessor;
