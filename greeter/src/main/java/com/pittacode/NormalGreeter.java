@@ -7,7 +7,7 @@ public class NormalGreeter implements Greeter {
     private final String[] names;
 
     public NormalGreeter(String[] names) {
-        this.names = names;
+        this.names = names.clone();
     }
 
     public NormalGreeter(String name) {

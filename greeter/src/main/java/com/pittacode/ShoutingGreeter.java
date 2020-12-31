@@ -7,7 +7,7 @@ public class ShoutingGreeter implements Greeter {
     private final String[] names;
 
     public ShoutingGreeter(String[] names) {
-        this.names = names;
+        this.names = names.clone();
     }
 
     public ShoutingGreeter(String name) {

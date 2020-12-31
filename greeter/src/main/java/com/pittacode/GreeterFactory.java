@@ -6,7 +6,7 @@ public class GreeterFactory {
     private final NameDifferentiator nameDifferentiator;
 
     public GreeterFactory(String[] names) {
-        this.names = names;
+        this.names = names.clone();
         nameDifferentiator = new NameDifferentiator(names);
     }
 

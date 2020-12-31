@@ -9,7 +9,7 @@ public class NameDifferentiator {
     private final String[] names;
 
     public NameDifferentiator(String[] names) {
-        this.names = names;
+        this.names = names.clone();
     }
 
     public String[] getShoutedNames() {
