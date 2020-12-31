@@ -3,19 +3,16 @@ package com.pittacode;
 import java.util.Arrays;
 
 import static java.lang.String.format;
-import static java.util.function.Predicate.not;
 
 public class Greeter {
 
     public String buildGreeting(String[] names) {
         String[] splitNames = splitAnyCommaSeparatedEntriesToSingleNames(names);
 
-        var shoutedNames = Arrays.stream(splitNames)
-                                 .filter(this::isUpperCase)
-                                 .toArray(String[]::new);
-        var normalNames = Arrays.stream(splitNames)
-                                .filter(not(this::isUpperCase))
-                                .toArray(String[]::new);
+        var nameDifferentiator = new NameDifferentiator(splitNames);
+
+        var shoutedNames = nameDifferentiator.getNormalNames();
+        var normalNames = nameDifferentiator.getShoutedNames();
 
         var normalGreeter = new NormalGreeter(normalNames);
         var shoutingGreeter = new ShoutingGreeter(shoutedNames);
@@ -49,7 +46,7 @@ public class Greeter {
             return new GenericGreeter().buildGreeting();
         }
 
-        return isUpperCase(name)
+        return NameUtils.isShoutedName(name)
                 ? new ShoutingGreeter(name).buildGreeting()
                 : new NormalGreeter(name).buildGreeting();
     }
@@ -58,9 +55,5 @@ public class Greeter {
         return name == null || name.isEmpty();
     }
 
-    private boolean isUpperCase(String name) {
-        return name.codePoints()
-                   .mapToObj(i -> (char) i)
-                   .allMatch(ch -> !Character.isLetter(ch) || Character.isUpperCase(ch));
-    }
+
 }
