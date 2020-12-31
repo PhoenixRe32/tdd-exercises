@@ -25,9 +25,23 @@ public class Greeter {
 
     private String[] splitAnyCommaSeparatedEntriesToSingleNames(String[] names) {
         return Arrays.stream(names)
-                     .map(name -> name.split(","))
+                     .map(this::splitNames)
                      .flatMap(name -> Arrays.stream(name.clone()).map(String::trim))
                      .toArray(String[]::new);
+    }
+
+    private String[] splitNames(String name) {
+        return isNameSurrounedWithQuotes(name)
+                ? new String[]{removeQuotes(name)}
+                : name.split(",");
+    }
+
+    private boolean isNameSurrounedWithQuotes(String name) {
+        return name.startsWith("\"") && name.endsWith("\"");
+    }
+
+    private String removeQuotes(String name) {
+        return name.substring(1, name.length() - 1);
     }
 
     private String joinGreetings(String normalGreeting, String shoutedGreeting) {
