@@ -6,19 +6,21 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class RomanConverterTest {
-    private RomanConverter converter;
 
-//    @ParameterizedTest
-//    @ValueSource(strings = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"})
-//    void whenPasssingInvalidCharacter_throwException() {
-//
-//    }
+    private RomanConverter converter;
 
     @BeforeEach
     void setUp() {
         converter = new RomanConverter();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"A", "B", "E", "F", "G", "H", "J", "K", "N", "O", "P", "Q", "R", "S", "T", "U", "W", "X", "Y", "Z"})
+    void whenPasssingInvalidCharacter_throwException(String input) {
+        assertThatThrownBy(() -> converter.convert(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -55,5 +57,11 @@ class RomanConverterTest {
     void Dequals500() {
         var result = converter.convert("D");
         assertThat(result).isEqualTo(500);
+    }
+
+    @Test
+    void Mequals1000() {
+        var result = converter.convert("M");
+        assertThat(result).isEqualTo(1000);
     }
 }
