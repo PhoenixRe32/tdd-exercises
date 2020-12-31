@@ -2,7 +2,18 @@ package com.pittacode;
 
 public class RomanConverter {
 
-    public int convert(String roman) {
-        return 1;
+    private static final String I = "I";
+    private static final String V = "V";
+
+    public int convert(String romanNumber) {
+        if (romanNumber.equals(I)) {
+            return 1;
+        }
+
+        if (romanNumber.equals(V)) {
+            return 5;
+        }
+
+        return -1;
     }
 }
