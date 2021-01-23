@@ -1194,7 +1194,8 @@ class RomanConverterTest {
             "XD", "XM",
             "LC", "LD", "LM",
             "DM"})
-    void whenPassingInvalidRomanNumeral_throwException(String input) {
+    void whenPassingInvalidSubtractionRomanNumerals_throwException(String input) {
         assertThatThrownBy(() -> underTest.convert(input)).isInstanceOf(IllegalArgumentException.class);
     }
+
 }
