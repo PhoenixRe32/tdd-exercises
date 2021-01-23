@@ -14,23 +14,23 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class RomanConverterTest {
 
-    private RomanConverter converter;
+    private RomanConverter underTest;
 
     @BeforeEach
     void setUp() {
-        converter = new RomanConverter();
+        underTest = new RomanConverter();
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"A", "B", "E", "F", "G", "H", "J", "K", "N", "O", "P", "Q", "R", "S", "T", "U", "W", "Y", "Z"})
     void whenPasssingInvalidCharacter_throwException(String input) {
-        assertThatThrownBy(() -> converter.convert(input)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> underTest.convert(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @MethodSource("romanNumeralsAndTheirValues")
     void romanNumeralInput_convertsToTheExpectedValue(String romanNumeral, int decimalValue) {
-        var result = converter.convert(romanNumeral);
+        var result = underTest.convert(romanNumeral);
 
         assertThat(result).isEqualTo(decimalValue);
     }
@@ -1182,5 +1182,11 @@ class RomanConverterTest {
                 arguments("MCMXCIX", 1999),
                 arguments("MM", 2000)
         );
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"IL", "IC", "ID", "IM", "VX", "VL", "VC", "VD", "VM", "XD", "XM", "LC", "LD", "LM", "DM"})
+    void whenPassingInvalidRomanNumeral_throwException(String input) {
+        assertThatThrownBy(() -> underTest.convert(input)).isInstanceOf(IllegalArgumentException.class);
     }
 }
