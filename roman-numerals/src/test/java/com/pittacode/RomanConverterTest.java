@@ -22,7 +22,10 @@ class RomanConverterTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"A", "B", "E", "F", "G", "H", "J", "K", "N", "O", "P", "Q", "R", "S", "T", "U", "W", "Y", "Z"})
+    @ValueSource(strings = {
+            "A", "B", "E", "F", "G", "H",
+            "J", "K", "N", "O", "P", "Q",
+            "R", "S", "T", "U", "W", "Y", "Z"})
     void whenPasssingInvalidCharacter_throwException(String input) {
         assertThatThrownBy(() -> underTest.convert(input)).isInstanceOf(IllegalArgumentException.class);
     }
@@ -1185,7 +1188,12 @@ class RomanConverterTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"IL", "IC", "ID", "IM", "VX", "VL", "VC", "VD", "VM", "XD", "XM", "LC", "LD", "LM", "DM"})
+    @ValueSource(strings = {
+            "IL", "IC", "ID", "IM",
+            "VX", "VL", "VC", "VD", "VM",
+            "XD", "XM",
+            "LC", "LD", "LM",
+            "DM"})
     void whenPassingInvalidRomanNumeral_throwException(String input) {
         assertThatThrownBy(() -> underTest.convert(input)).isInstanceOf(IllegalArgumentException.class);
     }
