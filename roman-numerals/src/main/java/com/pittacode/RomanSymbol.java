@@ -3,22 +3,28 @@ package com.pittacode;
 import java.util.Arrays;
 
 public enum RomanSymbol {
-    I(1),
-    V(5),
-    X(10),
-    L(50),
-    C(100),
-    D(500),
-    M(1000);
+    I(1, true),
+    V(5, false),
+    X(10, true),
+    L(50, false),
+    C(100, true),
+    D(500, false),
+    M(1000, true);
 
     private final int value;
+    private final boolean isSubtractable;
 
-    RomanSymbol(int value) {
+    RomanSymbol(int value, boolean isSubtractable) {
         this.value = value;
+        this.isSubtractable = isSubtractable;
     }
 
     public int getValue() {
         return value;
+    }
+
+    public boolean isSubtractable() {
+        return isSubtractable;
     }
 
     public static RomanSymbol from(Character c) {

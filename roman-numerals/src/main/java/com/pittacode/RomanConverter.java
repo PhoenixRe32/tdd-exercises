@@ -21,20 +21,13 @@ public class RomanConverter {
                 sum += getValueOfSymbol(currentRomanSymbol);
                 currentCharacter = nextCharacter;
             } else {
+
                 sum += getDifferenceOfCurrentSymbolAndTheNext(currentRomanSymbol, RomanSymbol.from(nextCharacter));
                 currentCharacter = romanNumberCharIterator.next();
             }
         }
 
         return sum;
-    }
-
-    private int getDifferenceOfCurrentSymbolAndTheNext(RomanSymbol currentRomanSymbol, RomanSymbol nextRomanSymbol) {
-        return nextRomanSymbol.getValue() - currentRomanSymbol.getValue();
-    }
-
-    private int getValueOfSymbol(RomanSymbol currentRomanSymbol) {
-        return currentRomanSymbol.getValue();
     }
 
     private boolean isIteratorAtEndOfString(char nextCharacter) {
@@ -47,5 +40,26 @@ public class RomanConverter {
 
     private boolean isNextRomanSymbolBigger(RomanSymbol currentRomanSymbol, RomanSymbol nextRomanSymbol) {
         return nextRomanSymbol.getValue() > currentRomanSymbol.getValue();
+    }
+
+    private int getValueOfSymbol(RomanSymbol currentRomanSymbol) {
+        return currentRomanSymbol.getValue();
+    }
+
+    private int getDifferenceOfCurrentSymbolAndTheNext(RomanSymbol currentRomanSymbol, RomanSymbol nextRomanSymbol) {
+        if (!currentRomanSymbol.isSubtractable()) {
+            throw new IllegalArgumentException("Can't use " + currentRomanSymbol + " for subtraction");
+        }
+
+        if (!areSymbolsWithinSameOrderOfMagnitude(currentRomanSymbol, nextRomanSymbol)) {
+            throw new IllegalArgumentException(
+                    "Can't subtract " + currentRomanSymbol + " from " + nextRomanSymbol + ".\n" +
+                            "They must be withing same order of magintude. (e.g. [I,V,X], [X,L,C], [C,D,M])");
+        }
+        return nextRomanSymbol.getValue() - currentRomanSymbol.getValue();
+    }
+
+    private boolean areSymbolsWithinSameOrderOfMagnitude(RomanSymbol currentRomanSymbol, RomanSymbol nextRomanSymbol) {
+        return nextRomanSymbol.ordinal() - currentRomanSymbol.ordinal() <= 2;
     }
 }
