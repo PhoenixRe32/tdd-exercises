@@ -10,28 +10,39 @@ public class RomanConverter {
         var romanNumberCharIterator = new StringCharacterIterator(romanNumber);
 
         var sum = 0;
-        var currentCharacter = romanNumberCharIterator.current();
+        var currentCharacter = romanNumberCharIterator.first();
         while (currentCharacter != DONE) {
             var currentRomanSymbol = RomanSymbol.from(currentCharacter);
 
             var nextCharacter = romanNumberCharIterator.next();
 
-            if (nextCharacter == DONE) {
-                sum += currentRomanSymbol.getValue();
+            if (isIteratorAtEndOfString(nextCharacter)
+                    || isNextRomanSymbolEqualOrSmaller(currentRomanSymbol, RomanSymbol.from(nextCharacter))) {
+                sum += getValueOfSymbol(currentRomanSymbol);
                 currentCharacter = nextCharacter;
             } else {
-                var nextRomanSymbol = RomanSymbol.from(nextCharacter);
-                if (isNextRomanSymbolBigger(currentRomanSymbol, nextRomanSymbol)){
-                    sum += (nextRomanSymbol.getValue() - currentRomanSymbol.getValue());
-                    currentCharacter = romanNumberCharIterator.next();
-                } else {
-                    sum += currentRomanSymbol.getValue();
-                    currentCharacter = nextCharacter;
-                }
+                sum += getDifferenceOfCurrentSymbolAndTheNext(currentRomanSymbol, RomanSymbol.from(nextCharacter));
+                currentCharacter = romanNumberCharIterator.next();
             }
         }
 
         return sum;
+    }
+
+    private int getDifferenceOfCurrentSymbolAndTheNext(RomanSymbol currentRomanSymbol, RomanSymbol nextRomanSymbol) {
+        return nextRomanSymbol.getValue() - currentRomanSymbol.getValue();
+    }
+
+    private int getValueOfSymbol(RomanSymbol currentRomanSymbol) {
+        return currentRomanSymbol.getValue();
+    }
+
+    private boolean isIteratorAtEndOfString(char nextCharacter) {
+        return nextCharacter == DONE;
+    }
+
+    private boolean isNextRomanSymbolEqualOrSmaller(RomanSymbol currentRomanSymbol, RomanSymbol nextRomanSymbol) {
+        return !isNextRomanSymbolBigger(currentRomanSymbol, nextRomanSymbol);
     }
 
     private boolean isNextRomanSymbolBigger(RomanSymbol currentRomanSymbol, RomanSymbol nextRomanSymbol) {
