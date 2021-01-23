@@ -6,24 +6,23 @@ public class FizzBuzzTranslator {
     private static final String FIZZ = "Fizz";
 
     public String translate(int input) {
-
         if (input < 1) {
             throw new IllegalArgumentException("Doesn't accept zero or negative values");
         }
 
-        if (isDivisibleBy3(input) && isDivisibleBy5(input)) {
-            return FIZZ + BUZZ;
+        var result = "";
+
+        if (isDivisibleBy3(input)) {
+            result += FIZZ;
         }
 
         if (isDivisibleBy5(input)) {
-            return BUZZ;
+            result += BUZZ;
         }
 
-        if (isDivisibleBy3(input)) {
-            return FIZZ;
-        }
-
-        return String.valueOf(input);
+        return result.isBlank()
+                ? String.valueOf(input)
+                : result;
     }
 
     private boolean isDivisibleBy3(int input) {
