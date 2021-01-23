@@ -40,6 +40,7 @@ class RomanConverterTest {
                 arguments("I", 1),
                 arguments("II", 2),
                 arguments("III", 3),
+                arguments("IV", 4),
                 arguments("V", 5),
                 arguments("VI", 6),
                 arguments("VII", 7),
