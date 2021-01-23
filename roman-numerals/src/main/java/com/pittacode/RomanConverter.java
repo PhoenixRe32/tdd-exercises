@@ -17,12 +17,14 @@ public class RomanConverter {
             var nextCharacter = romanNumberCharIterator.next();
 
             if (isIteratorAtEndOfString(nextCharacter)
-                    || isNextRomanSymbolEqualOrSmaller(currentRomanSymbol, RomanSymbol.from(nextCharacter))) {
+                    || isNextRomanSymbolEqualOrSmaller(currentRomanSymbol,
+                                                       RomanSymbol.from(nextCharacter))) {
                 sum += getValueOfSymbol(currentRomanSymbol);
                 currentCharacter = nextCharacter;
             } else {
 
-                sum += getDifferenceOfCurrentSymbolAndTheNext(currentRomanSymbol, RomanSymbol.from(nextCharacter));
+                sum += getDifferenceOfCurrentSymbolAndTheNext(currentRomanSymbol,
+                                                              RomanSymbol.from(nextCharacter));
                 currentCharacter = romanNumberCharIterator.next();
             }
         }
@@ -56,6 +58,7 @@ public class RomanConverter {
                     "Can't subtract " + currentRomanSymbol + " from " + nextRomanSymbol + ".\n" +
                             "They must be withing same order of magintude. (e.g. [I,V,X], [X,L,C], [C,D,M])");
         }
+
         return nextRomanSymbol.getValue() - currentRomanSymbol.getValue();
     }
 
