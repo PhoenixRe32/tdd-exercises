@@ -3,10 +3,10 @@ package com.pittacode;
 public class RomanConverter {
 
     public int convert(String romanNumber) {
-        var romanNumberSymbols = romanNumber.toCharArray();
+        var romanSymbols = romanNumber.toCharArray();
 
         var sum = 0;
-        for (Character romanSymbol : romanNumberSymbols) {
+        for (Character romanSymbol : romanSymbols) {
             sum += getRomanSymbolValue(romanSymbol);
         }
 
