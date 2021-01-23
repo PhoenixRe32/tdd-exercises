@@ -2,43 +2,54 @@ package com.pittacode;
 
 public class RomanConverter {
 
-    private static final String I = "I";
-    private static final String V = "V";
-    private static final String X = "X";
-    private static final String L = "L";
-    private static final String C = "C";
-    private static final String D = "D";
-    private static final String M = "M";
+    private static final Character I = 'I';
+    private static final Character V = 'V';
+    private static final Character X = 'X';
+    private static final Character L = 'L';
+    private static final Character C = 'C';
+    private static final Character D = 'D';
+    private static final Character M = 'M';
 
     public int convert(String romanNumber) {
-        if (romanNumber.equals(I)) {
+        var romanNumberSymbols = romanNumber.toCharArray();
+
+        var sum = 0;
+        for (Character romanSymbol : romanNumberSymbols) {
+            sum += getRomanSymbolValue(romanSymbol);
+        }
+
+        return sum;
+    }
+
+    private int getRomanSymbolValue(Character romanSymbol) {
+        if (romanSymbol.equals(I)) {
             return 1;
         }
 
-        if (romanNumber.equals(V)) {
+        if (romanSymbol.equals(V)) {
             return 5;
         }
 
-        if (romanNumber.equals(X)) {
+        if (romanSymbol.equals(X)) {
             return 10;
         }
 
-        if (romanNumber.equals(L)) {
+        if (romanSymbol.equals(L)) {
             return 50;
         }
 
-        if (romanNumber.equals(C)) {
+        if (romanSymbol.equals(C)) {
             return 100;
         }
 
-        if (romanNumber.equals(D)) {
+        if (romanSymbol.equals(D)) {
             return 500;
         }
 
-        if (romanNumber.equals(M)) {
+        if (romanSymbol.equals(M)) {
             return 1000;
         }
 
-        throw new IllegalArgumentException(romanNumber + " is not a roman numeral.");
+        throw new IllegalArgumentException(romanSymbol + " is not a roman numeral symbol.");
     }
 }
