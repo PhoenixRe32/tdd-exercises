@@ -1,6 +1,10 @@
 package com.pittacode;
 
 import java.util.Arrays;
+import java.util.Collection;
+
+import static java.util.function.Predicate.not;
+import static java.util.stream.Collectors.toList;
 
 public enum RomanSymbol {
     I(1, true),
@@ -32,5 +36,11 @@ public enum RomanSymbol {
                      .filter(symbol -> symbol.name().equalsIgnoreCase(c.toString()))
                      .findFirst()
                      .orElseThrow(() -> new IllegalArgumentException(c + " is not a roman numeral symbol."));
+    }
+
+    public static Collection<RomanSymbol> getNonSubtractable() {
+        return Arrays.stream(values())
+                     .filter(not(RomanSymbol::isSubtractable))
+                     .collect(toList());
     }
 }
