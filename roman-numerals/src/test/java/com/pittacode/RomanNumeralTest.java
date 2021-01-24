@@ -1,5 +1,6 @@
 package com.pittacode;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -33,6 +34,7 @@ class RomanNumeralTest {
         assertThatThrownBy(() -> new RomanNumeral(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Disabled
     @ParameterizedTest
     @ValueSource(strings = {"IIV", "IIX", "IXL", "IXC", "XXC", "XCD", "CCM",})
     void whenPassingInvalidRomanNumeral_throwException(String input) {
