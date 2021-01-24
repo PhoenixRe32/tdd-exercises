@@ -16,39 +16,25 @@ public class RomanConverter {
 
             var nextCharacter = romanNumberCharIterator.next();
 
-            if (isIteratorAtEndOfString(nextCharacter)
-                    || isNextRomanSymbolEqualOrSmaller(currentRomanSymbol,
-                                                       RomanSymbol.from(nextCharacter))) {
-                sum += getValueOfSymbol(currentRomanSymbol);
-                currentCharacter = nextCharacter;
+            if (isNextCharacterEndOfString(nextCharacter)) {
+                sum += getValue(currentRomanSymbol);
+            } else if (isNextRomanSymbolEqualOrSmaller(currentRomanSymbol, RomanSymbol.from(nextCharacter))) {
+                sum += getValue(currentRomanSymbol);
             } else {
+                sum -= getValue(currentRomanSymbol, RomanSymbol.from(nextCharacter));
 
-                sum += getDifferenceOfCurrentSymbolAndTheNext(currentRomanSymbol,
-                                                              RomanSymbol.from(nextCharacter));
-                currentCharacter = romanNumberCharIterator.next();
             }
+            currentCharacter = nextCharacter;
         }
 
         return sum;
     }
 
-    private boolean isIteratorAtEndOfString(char nextCharacter) {
-        return nextCharacter == DONE;
-    }
-
-    private boolean isNextRomanSymbolEqualOrSmaller(RomanSymbol currentRomanSymbol, RomanSymbol nextRomanSymbol) {
-        return !isNextRomanSymbolBigger(currentRomanSymbol, nextRomanSymbol);
-    }
-
-    private boolean isNextRomanSymbolBigger(RomanSymbol currentRomanSymbol, RomanSymbol nextRomanSymbol) {
-        return nextRomanSymbol.getValue() > currentRomanSymbol.getValue();
-    }
-
-    private int getValueOfSymbol(RomanSymbol currentRomanSymbol) {
+    private int getValue(RomanSymbol currentRomanSymbol) {
         return currentRomanSymbol.getValue();
     }
 
-    private int getDifferenceOfCurrentSymbolAndTheNext(RomanSymbol currentRomanSymbol, RomanSymbol nextRomanSymbol) {
+    private int getValue(RomanSymbol currentRomanSymbol, RomanSymbol nextRomanSymbol) {
         if (!currentRomanSymbol.isSubtractable()) {
             throw new IllegalArgumentException("Can't use " + currentRomanSymbol + " for subtraction");
         }
@@ -58,11 +44,22 @@ public class RomanConverter {
                     "Can't subtract " + currentRomanSymbol + " from " + nextRomanSymbol + ".\n" +
                             "They must be withing same order of magintude. (e.g. [I,V,X], [X,L,C], [C,D,M])");
         }
-
-        return nextRomanSymbol.getValue() - currentRomanSymbol.getValue();
+        return currentRomanSymbol.getValue();
     }
 
     private boolean areSymbolsWithinSameOrderOfMagnitude(RomanSymbol currentRomanSymbol, RomanSymbol nextRomanSymbol) {
         return nextRomanSymbol.ordinal() - currentRomanSymbol.ordinal() <= 2;
+    }
+
+    private boolean isNextCharacterEndOfString(char nextCharacter) {
+        return nextCharacter == DONE;
+    }
+
+    private boolean isNextRomanSymbolEqualOrSmaller(RomanSymbol currentRomanSymbol, RomanSymbol nextRomanSymbol) {
+        return !isNextRomanSymbolBigger(currentRomanSymbol, nextRomanSymbol);
+    }
+
+    private boolean isNextRomanSymbolBigger(RomanSymbol currentRomanSymbol, RomanSymbol nextRomanSymbol) {
+        return nextRomanSymbol.getValue() > currentRomanSymbol.getValue();
     }
 }
