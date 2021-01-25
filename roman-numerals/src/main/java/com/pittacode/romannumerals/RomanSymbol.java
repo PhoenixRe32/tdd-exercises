@@ -1,4 +1,4 @@
-package com.pittacode;
+package com.pittacode.romannumerals;
 
 import java.util.Arrays;
 import java.util.Collection;

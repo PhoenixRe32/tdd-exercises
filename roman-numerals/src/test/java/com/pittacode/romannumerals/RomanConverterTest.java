@@ -1,4 +1,4 @@
-package com.pittacode;
+package com.pittacode.romannumerals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;

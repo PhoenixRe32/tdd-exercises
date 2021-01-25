@@ -1,8 +1,7 @@
-package com.pittacode;
+package com.pittacode.romannumerals;
 
 import java.util.List;
 
-import static com.pittacode.RomanSymbol.getNonSubtractable;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
@@ -13,9 +12,9 @@ public class RomanNumeral {
     public static final String SUBTRACT_ERROR
             = "Can't subtract %s from %s. " + MAGNITUDE_WARNING;
     private static final String REPEAT_ERROR
-            = "Non subtractable symbol (" + getNonSubtractable() + ") repeated [%s at position %d]";
+            = "Non subtractable symbol (" + RomanSymbol.getNonSubtractable() + ") repeated [%s at position %d]";
     private static final String ORDER_ERROR
-            = "Non subtractable symbol (" + getNonSubtractable() + ") followed by a bigger symbol [%s at position %d]";
+            = "Non subtractable symbol (" + RomanSymbol.getNonSubtractable() + ") followed by a bigger symbol [%s at position %d]";
 
     private final List<RomanSymbol> symbols;
 
