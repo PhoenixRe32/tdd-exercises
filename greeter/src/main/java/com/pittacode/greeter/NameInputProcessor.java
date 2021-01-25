@@ -1,4 +1,4 @@
-package com.pittacode;
+package com.pittacode.greeter;
 
 import java.util.Arrays;
 

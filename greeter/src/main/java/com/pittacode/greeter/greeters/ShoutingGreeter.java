@@ -1,16 +1,14 @@
-package com.pittacode.greeters;
+package com.pittacode.greeter.greeters;
 
-import static java.lang.String.format;
-
-public class NormalGreeter implements Greeter {
+public class ShoutingGreeter implements Greeter {
 
     private final String[] names;
 
-    public NormalGreeter(String[] names) {
+    public ShoutingGreeter(String[] names) {
         this.names = names.clone();
     }
 
-    public NormalGreeter(String name) {
+    public ShoutingGreeter(String name) {
         this(new String[]{name});
     }
 
@@ -24,28 +22,20 @@ public class NormalGreeter implements Greeter {
             return buildGreeting(names[0]);
         }
 
-        if (names.length == 2) {
-            return buildGreeting(names[0], names[1]);
-        }
-
-        return buildGreetingFor3OrMore(names);
+        return buildGreetingForMultiplePeople(names);
     }
 
     private String buildGreeting(String name) {
-        return "Hello, " + name + ".";
+        return "HELLO " + name + "!";
     }
 
-    private String buildGreeting(String name1, String name2) {
-        return format("Hello, %s and %s.", name1, name2);
-    }
-
-    private String buildGreetingFor3OrMore(String[] names) {
-        var greetingBuilder = new StringBuilder("Hello, ");
+    private String buildGreetingForMultiplePeople(String[] names) {
+        var greetingBuilder = new StringBuilder("HELLO ");
         for (int i = 0; i < names.length - 1; i++) {
             greetingBuilder.append(names[i]);
-            greetingBuilder.append(", ");
+            greetingBuilder.append(" AND ");
         }
-        greetingBuilder.append("and ");
+        greetingBuilder.append(" AND ");
         greetingBuilder.append(names[names.length - 1]);
         greetingBuilder.append(".");
 

@@ -1,8 +1,8 @@
-package com.pittacode;
+package com.pittacode.greeter;
 
-import com.pittacode.greeters.GenericGreeter;
-import com.pittacode.greeters.NormalGreeter;
-import com.pittacode.greeters.ShoutingGreeter;
+import com.pittacode.greeter.greeters.GenericGreeter;
+import com.pittacode.greeter.greeters.NormalGreeter;
+import com.pittacode.greeter.greeters.ShoutingGreeter;
 
 public class GreeterGenerator {
 

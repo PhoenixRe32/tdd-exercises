@@ -1,4 +1,4 @@
-package com.pittacode;
+package com.pittacode.greeter;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

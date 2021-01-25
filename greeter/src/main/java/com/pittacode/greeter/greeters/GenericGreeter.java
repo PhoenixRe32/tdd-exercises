@@ -1,4 +1,4 @@
-package com.pittacode.greeters;
+package com.pittacode.greeter.greeters;
 
 public class GenericGreeter implements Greeter {
 

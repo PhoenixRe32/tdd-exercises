@@ -1,6 +1,6 @@
-package com.pittacode;
+package com.pittacode.greeter;
 
-import com.pittacode.greeters.Greeter;
+import com.pittacode.greeter.greeters.Greeter;
 
 class GreeterJoiner {
 
