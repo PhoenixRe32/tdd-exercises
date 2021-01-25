@@ -1,13 +1,10 @@
-package com.pittacode;
+package com.pittacode.fizzbuzz;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.ArgumentMatchers;
 
-import java.util.List;
 import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;

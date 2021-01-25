@@ -1,4 +1,4 @@
-package com.pittacode;
+package com.pittacode.fizzbuzz;
 
 public class Runner {
     public static void main(String[] args) {

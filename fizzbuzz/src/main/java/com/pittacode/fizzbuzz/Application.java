@@ -1,4 +1,4 @@
-package com.pittacode;
+package com.pittacode.fizzbuzz;
 
 import java.util.stream.IntStream;
 
