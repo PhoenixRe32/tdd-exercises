@@ -31,7 +31,7 @@ public class RecentlyUsedListImpl implements RecentlyUsedList {
 
     @Override
     public void add(String element) {
-        if (isEmpty(element)) {
+        if (isElementAllowed(element)) {
             return;
         }
 
@@ -45,7 +45,7 @@ public class RecentlyUsedListImpl implements RecentlyUsedList {
         size++;
     }
 
-    protected boolean isEmpty(String element) {
+    protected boolean isElementAllowed(String element) {
         return element == null || element.isEmpty();
     }
 
