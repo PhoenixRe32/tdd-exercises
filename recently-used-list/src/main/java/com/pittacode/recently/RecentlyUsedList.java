@@ -1,5 +1,7 @@
 package com.pittacode.recently;
 
+import java.util.Arrays;
+
 public class RecentlyUsedList {
 
     private static final int DEFAULT_SIZE = 5;
@@ -12,8 +14,15 @@ public class RecentlyUsedList {
     }
 
     public void add(String element) {
+        if (isArrayFull()) {
+            elements = Arrays.copyOf(elements, size + DEFAULT_SIZE);
+        }
         elements[size] = element;
         size++;
+    }
+
+    private boolean isArrayFull() {
+        return size == elements.length;
     }
 
     public String get(int index) {

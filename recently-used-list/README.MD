@@ -3,7 +3,8 @@ Recently used list
 
 Develop a recently-used-list class to hold strings uniquely in Last-In-First-Out order.
 
-* Personal restiction: use an array as the underlying structure
+* Personal restiction: use an array as the underlying structure.
+* Use default initial size of 5 and resize when needed.
 * The most recently added item is first, the least recently added item is last.
 * Items can be looked up by index, which counts from zero.
 * Items in the list are unique, so duplicate insertions are moved rather than added.
