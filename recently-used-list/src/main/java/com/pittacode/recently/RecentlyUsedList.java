@@ -58,7 +58,7 @@ public class RecentlyUsedList {
                          index);
         System.arraycopy(elements, index + 1,
                          newArray, index,
-                         size - index);
+                         size - (index + 1));
         elements = newArray;
         size -= 1;
     }
