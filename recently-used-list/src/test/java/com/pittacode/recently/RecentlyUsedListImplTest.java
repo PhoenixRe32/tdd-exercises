@@ -9,13 +9,13 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RecentlyUsedListTest {
+public class RecentlyUsedListImplTest {
 
     private RecentlyUsedList underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new RecentlyUsedList();
+        underTest = new RecentlyUsedListImpl();
     }
 
     @Test
@@ -47,7 +47,7 @@ public class RecentlyUsedListTest {
         assertThat(underTest.get(1)).isEqualTo("element-0");
     }
 
-    @Test
+    @Test // implementation detail -> array starts with 5 spaces
     void shouldResizeArray_whenStoringMoreThan5Elements() {
         IntStream.range(0, 6)
                  .forEach(i -> underTest.add("element-" + i));
@@ -56,7 +56,7 @@ public class RecentlyUsedListTest {
         assertThat(underTest.get(0)).isEqualTo("element-5");
     }
 
-    @Test
+    @Test // implementation detail -> in every resize, 5 spaces are added
     void shouldResizeArrayAgain_whenStoringMoreThan10Elements() {
         IntStream.range(0, 11)
                  .forEach(i -> underTest.add("element-" + i));
@@ -104,22 +104,5 @@ public class RecentlyUsedListTest {
         underTest.add(element);
 
         assertThat(underTest.size()).isEqualTo(0);
-    }
-
-    @Test
-    void shouldBoundArray_whenConstructedWithSizeArgument() {
-        underTest = new RecentlyUsedList(3);
-
-        underTest.add("element-0");
-        underTest.add("element-1");
-        underTest.add("element-2");
-        underTest.add("element-3");
-        underTest.add("element-2");
-        underTest.add("element-1");
-
-        assertThat(underTest.size()).isEqualTo(3);
-        assertThat(underTest.get(0)).isEqualTo("element-1");
-        assertThat(underTest.get(1)).isEqualTo("element-2");
-        assertThat(underTest.get(2)).isEqualTo("element-3");
     }
 }
