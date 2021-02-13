@@ -45,11 +45,11 @@ public class RecentlyUsedListImpl implements RecentlyUsedList {
         size++;
     }
 
-    protected boolean isElementAllowed(String element) {
+    private boolean isElementAllowed(String element) {
         return element == null || element.isEmpty();
     }
 
-    protected void remove(String element) {
+    private void remove(String element) {
         var elementIndex = findIndexOf(element);
         if (elementIndex.isPresent()) {
             var duplicateEntryIndex = elementIndex.getAsInt();
@@ -79,7 +79,7 @@ public class RecentlyUsedListImpl implements RecentlyUsedList {
         size -= 1;
     }
 
-    protected boolean isArrayFull() {
+    private boolean isArrayFull() {
         return size == elements.length;
     }
 
