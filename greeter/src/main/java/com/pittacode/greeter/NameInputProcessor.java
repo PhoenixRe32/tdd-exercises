@@ -4,10 +4,6 @@ import java.util.Arrays;
 
 public class NameInputProcessor {
 
-    public String[] process(String[] names) {
-        return splitAnyCommaSeparatedEntriesToSingleNames(names);
-    }
-
     public String[] splitAnyCommaSeparatedEntriesToSingleNames(String[] names) {
         return Arrays.stream(names)
                      .map(this::splitNames)

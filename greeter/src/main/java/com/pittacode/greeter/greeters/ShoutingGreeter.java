@@ -1,15 +1,11 @@
 package com.pittacode.greeter.greeters;
 
-public class ShoutingGreeter implements Greeter {
+class ShoutingGreeter implements Greeter {
 
     private final String[] names;
 
-    public ShoutingGreeter(String[] names) {
+    ShoutingGreeter(String[] names) {
         this.names = names.clone();
-    }
-
-    public ShoutingGreeter(String name) {
-        this(new String[]{name});
     }
 
     @Override

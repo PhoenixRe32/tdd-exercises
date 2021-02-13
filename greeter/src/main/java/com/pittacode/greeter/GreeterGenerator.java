@@ -1,8 +1,8 @@
 package com.pittacode.greeter;
 
-import com.pittacode.greeter.greeters.GenericGreeter;
-import com.pittacode.greeter.greeters.NormalGreeter;
-import com.pittacode.greeter.greeters.ShoutingGreeter;
+import static com.pittacode.greeter.greeters.GreeterFactory.aGenericGreeter;
+import static com.pittacode.greeter.greeters.GreeterFactory.aNormalGreeter;
+import static com.pittacode.greeter.greeters.GreeterFactory.aShoutingGreeter;
 
 public class GreeterGenerator {
 
@@ -13,12 +13,12 @@ public class GreeterGenerator {
     }
 
     public String buildGreeting(String[] names) {
-        String[] processedNames = nameInputProcessor.process(names);
+        String[] processedNames = nameInputProcessor.splitAnyCommaSeparatedEntriesToSingleNames(names);
 
         var nameDifferentiator = new NameDifferentiator(processedNames);
 
-        var normalGreeter = new NormalGreeter(nameDifferentiator.getNormalNames());
-        var shoutingGreeter = new ShoutingGreeter(nameDifferentiator.getShoutedNames());
+        var normalGreeter = aNormalGreeter(nameDifferentiator.getNormalNames());
+        var shoutingGreeter = aShoutingGreeter(nameDifferentiator.getShoutedNames());
 
         return new GreeterJoiner(normalGreeter, shoutingGreeter).joinGreetings();
     }
@@ -26,7 +26,7 @@ public class GreeterGenerator {
 
     public String buildGreeting(String name) {
         if (isEmpty(name)) {
-            return new GenericGreeter().buildGreeting();
+            return aGenericGreeter().buildGreeting();
         }
 
         return buildGreeting(new String[]{name});
