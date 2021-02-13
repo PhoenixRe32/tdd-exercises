@@ -11,11 +11,11 @@ public class RecentlyUsedListImpl implements RecentlyUsedList {
     protected String[] elements;
     protected int size;
 
-    public RecentlyUsedListImpl() {
+    protected RecentlyUsedListImpl() {
         elements = new String[DEFAULT_SIZE];
     }
 
-    public RecentlyUsedListImpl(int initialSize) {
+    protected RecentlyUsedListImpl(int initialSize) {
         elements = new String[initialSize];
     }
 

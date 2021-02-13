@@ -2,10 +2,10 @@ package com.pittacode.recently;
 
 import java.util.Arrays;
 
-public class BoundedRecentlyUsedList extends RecentlyUsedListImpl {
+final class BoundedRecentlyUsedList extends RecentlyUsedListImpl {
 
-    public BoundedRecentlyUsedList(int boundedSize) {
-        super(boundedSize);
+    BoundedRecentlyUsedList(int size) {
+        super(size);
     }
 
     @Override
