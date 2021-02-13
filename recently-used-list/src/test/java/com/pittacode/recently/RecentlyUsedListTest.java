@@ -57,4 +57,37 @@ public class RecentlyUsedListTest {
         assertThat(underTest.size()).isEqualTo(11);
         assertThat(underTest.get(0)).isEqualTo("element-10");
     }
+
+    @Test
+    void shouldMoveDuplicatedEntryToTop() {
+        underTest.add("element-0");
+        underTest.add("element-1");
+        underTest.add("element-0");
+
+        assertThat(underTest.size()).isEqualTo(2);
+        assertThat(underTest.get(0)).isEqualTo("element-0");
+    }
+
+    @Test
+    void shouldStoreElementsInLIFOAndWithoutDuplicates() {
+        underTest.add("element-0");
+        underTest.add("element-1");
+        underTest.add("element-2");
+        underTest.add("element-3");
+        underTest.add("element-0");
+        underTest.add("element-4");
+        underTest.add("element-5");
+        underTest.add("element-6");
+        underTest.add("element-1");
+        underTest.add("element-3");
+
+        assertThat(underTest.size()).isEqualTo(7);
+        assertThat(underTest.get(0)).isEqualTo("element-3");
+        assertThat(underTest.get(1)).isEqualTo("element-1");
+        assertThat(underTest.get(2)).isEqualTo("element-6");
+        assertThat(underTest.get(3)).isEqualTo("element-5");
+        assertThat(underTest.get(4)).isEqualTo("element-4");
+        assertThat(underTest.get(5)).isEqualTo("element-0");
+        assertThat(underTest.get(6)).isEqualTo("element-2");
+    }
 }
