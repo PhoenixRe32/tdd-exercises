@@ -8,8 +8,19 @@ public class RecentlyUsedList {
 
     private static final int DEFAULT_SIZE = 5;
 
-    private String[] elements = new String[DEFAULT_SIZE];
+    private String[] elements;
     private int size;
+    private boolean isBounded;
+
+    public RecentlyUsedList() {
+        isBounded = false;
+        elements = new String[DEFAULT_SIZE];
+    }
+
+    public RecentlyUsedList(int boundedSize) {
+        isBounded = true;
+        elements = new String[boundedSize];
+    }
 
     public int size() {
         return size;
@@ -21,10 +32,12 @@ public class RecentlyUsedList {
 
     public void add(String element) {
         if (isEmpty(element)) {
-            return ;
+            return;
         }
         remove(element);
-        resize();
+        if (isArrayFull()) {
+            resize();
+        }
         elements[size] = element;
         size++;
     }
@@ -63,13 +76,16 @@ public class RecentlyUsedList {
         size -= 1;
     }
 
-    private void resize() {
-        if (isArrayFull()) {
-            elements = Arrays.copyOf(elements, size + DEFAULT_SIZE);
-        }
-    }
-
     private boolean isArrayFull() {
         return size == elements.length;
+    }
+
+    private void resize() {
+        if (isBounded) {
+            elements = Arrays.copyOfRange(elements, 1, elements.length + 1);
+            size -= 1;
+        } else {
+            elements = Arrays.copyOf(elements, size + DEFAULT_SIZE);
+        }
     }
 }
