@@ -2,6 +2,8 @@ package com.pittacode.recently;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.stream.IntStream;
 
@@ -94,5 +96,13 @@ public class RecentlyUsedListTest {
         assertThat(underTest.get(4)).isEqualTo("element-4");
         assertThat(underTest.get(5)).isEqualTo("element-0");
         assertThat(underTest.get(6)).isEqualTo("element-2");
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void shouldNotInsertEmptyOrNullStrings(String element) {
+        underTest.add(element);
+
+        assertThat(underTest.size()).isEqualTo(0);
     }
 }

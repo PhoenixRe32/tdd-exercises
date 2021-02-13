@@ -15,11 +15,22 @@ public class RecentlyUsedList {
         return size;
     }
 
+    public String get(int index) {
+        return elements[size - 1 - index];
+    }
+
     public void add(String element) {
+        if (isEmpty(element)) {
+            return ;
+        }
         remove(element);
-        resizeArray();
+        resize();
         elements[size] = element;
         size++;
+    }
+
+    private boolean isEmpty(String element) {
+        return element == null || element.isEmpty();
     }
 
     private void remove(String element) {
@@ -40,19 +51,19 @@ public class RecentlyUsedList {
         return element.equals(elements[index]);
     }
 
-    private void remove(int duplicateEntryIndex) {
+    private void remove(int index) {
         var newArray = new String[elements.length];
         System.arraycopy(elements, 0,
                          newArray, 0,
-                         duplicateEntryIndex);
-        System.arraycopy(elements, duplicateEntryIndex + 1,
-                         newArray, duplicateEntryIndex,
-                         size - (duplicateEntryIndex + 1));
+                         index);
+        System.arraycopy(elements, index + 1,
+                         newArray, index,
+                         size - index);
         elements = newArray;
         size -= 1;
     }
 
-    private void resizeArray() {
+    private void resize() {
         if (isArrayFull()) {
             elements = Arrays.copyOf(elements, size + DEFAULT_SIZE);
         }
@@ -60,9 +71,5 @@ public class RecentlyUsedList {
 
     private boolean isArrayFull() {
         return size == elements.length;
-    }
-
-    public String get(int index) {
-        return elements[size - 1 - index];
     }
 }
