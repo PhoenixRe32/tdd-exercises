@@ -34,10 +34,17 @@ public class RecentlyUsedList {
         if (isEmpty(element)) {
             return;
         }
+
         remove(element);
+
         if (isArrayFull()) {
-            resize();
+            if (isBounded) {
+                dropLeastUsedElement();
+            } else {
+                growArray();
+            }
         }
+
         elements[size] = element;
         size++;
     }
@@ -80,12 +87,12 @@ public class RecentlyUsedList {
         return size == elements.length;
     }
 
-    private void resize() {
-        if (isBounded) {
-            elements = Arrays.copyOfRange(elements, 1, elements.length + 1);
-            size -= 1;
-        } else {
-            elements = Arrays.copyOf(elements, size + DEFAULT_SIZE);
-        }
+    private void dropLeastUsedElement() {
+        elements = Arrays.copyOfRange(elements, 1, elements.length + 1);
+        size -= 1;
+    }
+
+    private void growArray() {
+        elements = Arrays.copyOf(elements, size + DEFAULT_SIZE);
     }
 }
