@@ -17,6 +17,11 @@ public class RecentlyUsedListTest {
     }
 
     @Test
+    void initialSizeIs0() {
+        assertThat(underTest.size()).isEqualTo(0);
+    }
+
+    @Test
     void shouldHaveSizeOf1_afterAddingOneItem() {
         underTest.add("element-0");
 
