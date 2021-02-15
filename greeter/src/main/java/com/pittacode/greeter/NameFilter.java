@@ -1,32 +1,42 @@
 package com.pittacode.greeter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static java.util.function.Predicate.not;
 
 class NameFilter {
 
-    private final String[] names;
+    private static final String[] EMPTY_STRING_ARRAY = new String[0];
 
-    NameFilter(String[] names) {
-        this.names = names.clone();
-    }
-
-    String[] filterShoutedNames() {
-        return Arrays.stream(names)
-                     .filter(this::isShoutedName)
-                     .toArray(String[]::new);
-    }
-
-    String[] filterNormalNames() {
-        return Arrays.stream(names)
-                     .filter(not(this::isShoutedName))
-                     .toArray(String[]::new);
+    Names filterNames(String[] names) {
+        List<String> normalNames = new ArrayList<>(names.length);
+        List<String> shoutedNames = new ArrayList<>(names.length);
+        for (String name : names) {
+            if (isShoutedName(name)) {
+                shoutedNames.add(name);
+            } else {
+                normalNames.add(name);
+            }
+        }
+        return new Names(normalNames.toArray(EMPTY_STRING_ARRAY), shoutedNames.toArray(EMPTY_STRING_ARRAY));
     }
 
     private boolean isShoutedName(String name) {
         return name.codePoints()
                    .mapToObj(i -> (char) i)
                    .allMatch(ch -> !Character.isLetter(ch) || Character.isUpperCase(ch));
+    }
+
+    static class Names {
+
+        final String[] normalNames;
+        final String[] shoutedNames;
+
+        Names(String[] normalNames, String[] shoutedNames) {
+            this.normalNames = normalNames.clone();
+            this.shoutedNames = shoutedNames.clone();
+        }
     }
 }
