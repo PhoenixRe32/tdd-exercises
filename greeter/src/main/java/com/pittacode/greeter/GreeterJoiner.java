@@ -21,6 +21,6 @@ class GreeterJoiner {
     }
 
     private boolean areWeGreetingBothNormallAndShouting() {
-        return !normalGreeter.isEmpty() && !shoutingGreeter.isEmpty();
+        return !normalGreeter.hasNoNames() && !shoutingGreeter.hasNoNames();
     }
 }

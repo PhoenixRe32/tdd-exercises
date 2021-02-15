@@ -49,7 +49,7 @@ class NormalGreeter implements Greeter {
     }
 
     @Override
-    public boolean isEmpty() {
+    public boolean hasNoNames() {
         return names.length == 0;
     }
 }

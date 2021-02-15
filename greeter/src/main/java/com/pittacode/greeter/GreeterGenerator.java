@@ -2,6 +2,8 @@ package com.pittacode.greeter;
 
 public class GreeterGenerator {
 
+    private static final Greeter NO_NAME_GREETER = () -> "Hello, my friend.";
+
     private final NameInputProcessor nameInputProcessor;
 
     public GreeterGenerator(NameInputProcessor nameInputProcessor) {
@@ -22,7 +24,7 @@ public class GreeterGenerator {
 
     public String buildGreeting(String name) {
         if (isEmpty(name)) {
-            return new GenericGreeter().buildGreeting();
+            return NO_NAME_GREETER.buildGreeting();
         }
 
         return buildGreeting(new String[]{name});
