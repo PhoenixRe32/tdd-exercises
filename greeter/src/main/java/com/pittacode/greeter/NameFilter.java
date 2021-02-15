@@ -4,21 +4,21 @@ import java.util.Arrays;
 
 import static java.util.function.Predicate.not;
 
-class NameDifferentiator {
+class NameFilter {
 
     private final String[] names;
 
-    NameDifferentiator(String[] names) {
+    NameFilter(String[] names) {
         this.names = names.clone();
     }
 
-    String[] getShoutedNames() {
+    String[] filterShoutedNames() {
         return Arrays.stream(names)
                      .filter(this::isShoutedName)
                      .toArray(String[]::new);
     }
 
-    String[] getNormalNames() {
+    String[] filterNormalNames() {
         return Arrays.stream(names)
                      .filter(not(this::isShoutedName))
                      .toArray(String[]::new);

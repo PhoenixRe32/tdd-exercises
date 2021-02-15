@@ -13,10 +13,10 @@ public class GreeterGenerator {
     public String buildGreeting(String[] names) {
         String[] processedNames = nameInputProcessor.splitAnyCommaSeparatedEntriesToSingleNames(names);
 
-        var nameDifferentiator = new NameDifferentiator(processedNames);
+        var nameDifferentiator = new NameFilter(processedNames);
 
-        var normalGreeter = new NormalGreeter(nameDifferentiator.getNormalNames());
-        var shoutingGreeter = new ShoutingGreeter(nameDifferentiator.getShoutedNames());
+        var normalGreeter = new NormalGreeter(nameDifferentiator.filterNormalNames());
+        var shoutingGreeter = new ShoutingGreeter(nameDifferentiator.filterShoutedNames());
 
         return new GreeterJoiner(normalGreeter, shoutingGreeter).joinGreetings();
     }
