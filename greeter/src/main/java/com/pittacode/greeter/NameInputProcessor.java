@@ -2,9 +2,9 @@ package com.pittacode.greeter;
 
 import java.util.Arrays;
 
-public class NameInputProcessor {
+class NameInputProcessor {
 
-    public String[] splitAnyCommaSeparatedEntriesToSingleNames(String[] names) {
+    String[] splitAnyCommaSeparatedEntriesToSingleNames(String[] names) {
         return Arrays.stream(names)
                      .map(this::splitNames)
                      .map(this::trimNames)

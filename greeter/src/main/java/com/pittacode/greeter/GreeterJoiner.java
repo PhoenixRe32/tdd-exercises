@@ -13,16 +13,13 @@ class GreeterJoiner {
     }
 
     String joinGreetings() {
-        var normalGreeting = normalGreeter.buildGreeting();
-        var shoutedGreeting = shoutingGreeter.buildGreeting();
-
-        var greetingBuilder = new StringBuilder(normalGreeting);
+        var greeting = new StringBuilder(normalGreeter.buildGreeting());
         if (areWeGreetingBothNormallAndShouting()) {
-            greetingBuilder.append(" AND ");
+            greeting.append(" AND ");
         }
-        greetingBuilder.append(shoutedGreeting);
+        greeting.append(shoutingGreeter.buildGreeting());
 
-        return greetingBuilder.toString();
+        return greeting.toString();
     }
 
     private boolean areWeGreetingBothNormallAndShouting() {
