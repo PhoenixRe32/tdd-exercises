@@ -2,7 +2,7 @@ package com.pittacode.greeter;
 
 import java.util.Arrays;
 
-class NameInputProcessor {
+class NameProcessor {
 
     String[] splitAnyCommaSeparatedEntriesToSingleNames(String[] names) {
         return Arrays.stream(names)

@@ -4,10 +4,10 @@ public class GreeterGenerator {
 
     private static final Greeter NO_NAME_GREETER = () -> "Hello, my friend.";
 
-    private final NameInputProcessor nameInputProcessor;
+    private final NameProcessor nameProcessor;
 
-    public GreeterGenerator(NameInputProcessor nameInputProcessor) {
-        this.nameInputProcessor = nameInputProcessor;
+    public GreeterGenerator(NameProcessor nameProcessor) {
+        this.nameProcessor = nameProcessor;
     }
 
     public String buildGreeting(String name) {
@@ -22,7 +22,7 @@ public class GreeterGenerator {
     }
 
     public String buildGreeting(String[] names) {
-        String[] processedNames = nameInputProcessor.splitAnyCommaSeparatedEntriesToSingleNames(names);
+        String[] processedNames = nameProcessor.splitAnyCommaSeparatedEntriesToSingleNames(names);
 
         var nameDifferentiator = new NameFilter(processedNames);
 
