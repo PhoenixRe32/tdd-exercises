@@ -10,6 +10,17 @@ public class GreeterGenerator {
         this.nameInputProcessor = nameInputProcessor;
     }
 
+    public String buildGreeting(String name) {
+        return isEmpty(name)
+                ? NO_NAME_GREETER.buildGreeting()
+                : buildGreeting(new String[]{name});
+
+    }
+
+    private boolean isEmpty(String name) {
+        return name == null || name.isEmpty();
+    }
+
     public String buildGreeting(String[] names) {
         String[] processedNames = nameInputProcessor.splitAnyCommaSeparatedEntriesToSingleNames(names);
 
@@ -19,18 +30,5 @@ public class GreeterGenerator {
         var shoutingGreeter = new ShoutingGreeter(nameDifferentiator.filterShoutedNames());
 
         return new GreeterJoiner(normalGreeter, shoutingGreeter).joinGreetings();
-    }
-
-
-    public String buildGreeting(String name) {
-        if (isEmpty(name)) {
-            return NO_NAME_GREETER.buildGreeting();
-        }
-
-        return buildGreeting(new String[]{name});
-    }
-
-    private boolean isEmpty(String name) {
-        return name == null || name.isEmpty();
     }
 }
