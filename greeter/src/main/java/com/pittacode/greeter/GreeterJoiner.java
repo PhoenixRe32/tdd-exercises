@@ -1,7 +1,5 @@
 package com.pittacode.greeter;
 
-import com.pittacode.greeter.greeters.Greeter;
-
 class GreeterJoiner {
 
     private final Greeter normalGreeter;
