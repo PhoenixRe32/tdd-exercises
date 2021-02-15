@@ -2,21 +2,24 @@ package com.pittacode.greeter;
 
 public class GreeterGenerator {
 
-    private static final Greeter NO_NAME_GREETER = () -> "Hello, my friend.";
+    private static final String NO_NAME_GREETING = "Hello, my friend.";
 
     private final NameProcessor nameProcessor;
     private final NameFilter nameFilter;
+    private final GreeterJoiner greeterJoiner;
 
-    public GreeterGenerator(NameProcessor nameProcessor, NameFilter nameFilter) {
+    public GreeterGenerator(NameProcessor nameProcessor,
+                            NameFilter nameFilter,
+                            GreeterJoiner greeterJoiner) {
         this.nameProcessor = nameProcessor;
         this.nameFilter = nameFilter;
+        this.greeterJoiner = greeterJoiner;
     }
 
     public String buildGreeting(String name) {
         return isEmpty(name)
-                ? NO_NAME_GREETER.buildGreeting()
+                ? NO_NAME_GREETING
                 : buildGreeting(new String[]{name});
-
     }
 
     private boolean isEmpty(String name) {
@@ -28,9 +31,6 @@ public class GreeterGenerator {
 
         var filteredNames = nameFilter.filterNames(processedNames);
 
-        var normalGreeter = new NormalGreeter(filteredNames.normalNames);
-        var shoutingGreeter = new ShoutingGreeter(filteredNames.shoutedNames);
-
-        return new GreeterJoiner(normalGreeter, shoutingGreeter).joinGreetings();
+        return greeterJoiner.joinGreetings(filteredNames);
     }
 }

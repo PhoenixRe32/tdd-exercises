@@ -1,5 +1,7 @@
 package com.pittacode.greeter;
 
+import com.pittacode.greeter.NameFilter.Names;
+
 class GreeterJoiner {
 
     private final Greeter normalGreeter;
@@ -10,17 +12,17 @@ class GreeterJoiner {
         this.shoutingGreeter = shoutingGreeter;
     }
 
-    String joinGreetings() {
-        var greeting = new StringBuilder(normalGreeter.buildGreeting());
-        if (areWeGreetingBothNormallAndShouting()) {
+    String joinGreetings(Names names) {
+        var greeting = new StringBuilder(normalGreeter.buildGreeting(names.normalNames));
+        if (areWeGreetingBothNormallAndShouting(names)) {
             greeting.append(" AND ");
         }
-        greeting.append(shoutingGreeter.buildGreeting());
+        greeting.append(shoutingGreeter.buildGreeting(names.shoutedNames));
 
         return greeting.toString();
     }
 
-    private boolean areWeGreetingBothNormallAndShouting() {
-        return !normalGreeter.hasNoNames() && !shoutingGreeter.hasNoNames();
+    private boolean areWeGreetingBothNormallAndShouting(Names names) {
+        return names.normalNames.length != 0 && names.shoutedNames.length != 0;
     }
 }

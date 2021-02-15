@@ -2,14 +2,8 @@ package com.pittacode.greeter;
 
 class ShoutingGreeter implements Greeter {
 
-    private final String[] names;
-
-    ShoutingGreeter(String[] names) {
-        this.names = names.clone();
-    }
-
     @Override
-    public String buildGreeting() {
+    public String buildGreeting(String[] names) {
         if (names.length == 0) {
             return "";
         }
@@ -36,10 +30,5 @@ class ShoutingGreeter implements Greeter {
         greetingBuilder.append(".");
 
         return greetingBuilder.toString();
-    }
-
-    @Override
-    public boolean hasNoNames() {
-        return names.length == 0;
     }
 }

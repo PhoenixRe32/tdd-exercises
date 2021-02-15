@@ -4,14 +4,8 @@ import static java.lang.String.format;
 
 class NormalGreeter implements Greeter {
 
-    private final String[] names;
-
-    NormalGreeter(String[] names) {
-        this.names = names.clone();
-    }
-
     @Override
-    public String buildGreeting() {
+    public String buildGreeting(String[] names) {
         if (names.length == 0) {
             return "";
         }
@@ -46,10 +40,5 @@ class NormalGreeter implements Greeter {
         greetingBuilder.append(".");
 
         return greetingBuilder.toString();
-    }
-
-    @Override
-    public boolean hasNoNames() {
-        return names.length == 0;
     }
 }

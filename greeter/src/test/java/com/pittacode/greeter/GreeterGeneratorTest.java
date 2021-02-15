@@ -15,7 +15,8 @@ public class GreeterGeneratorTest {
     void setUp() {
         var nameInputProcessor = new NameProcessor();
         var nameFilter = new NameFilter();
-        underTest = new GreeterGenerator(nameInputProcessor, nameFilter);
+        var greeterJoiner = new GreeterJoiner(new NormalGreeter(), new ShoutingGreeter());
+        underTest = new GreeterGenerator(nameInputProcessor, nameFilter, greeterJoiner);
     }
 
     @Test
