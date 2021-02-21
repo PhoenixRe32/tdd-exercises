@@ -21,12 +21,13 @@ public class Game {
 
     public int score() {
         var totalScore = 0;
-        for (int i = 0, rollsLength = rolls.length; i < rollsLength - 2; i += 2) {
-            var frameScore = rolls[i] + rolls[i + 1];
-            totalScore += frameScore == MAX_PINS
-                    ? frameScore + rolls[i + 2]
-                    : frameScore;
+        for (int frame = 0; frame < FRAMES; frame++) {
+            var frameFirstRoll = frame << 1;
+            var frameScore = rolls[frameFirstRoll] + rolls[frameFirstRoll + 1];
 
+            totalScore += frameScore == MAX_PINS
+                    ? frameScore + rolls[frame + 2]
+                    : frameScore;
         }
         return totalScore;
     }
