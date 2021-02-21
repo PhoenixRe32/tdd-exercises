@@ -16,7 +16,15 @@ public class Game {
 
     public void roll(int pins) {
         rolls[roll] = pins;
-        roll++;
+        roll += isStrike(roll) ? 2 : 1;
+    }
+
+    private boolean isStrike(int roll) {
+        return rolls[roll] == MAX_PINS && isFirstRollOfAFrame(roll);
+    }
+
+    private boolean isFirstRollOfAFrame(int roll) {
+        return roll % 2 == 0;
     }
 
     public int score() {
@@ -25,9 +33,15 @@ public class Game {
             var frameFirstRoll = frame << 1;
             var frameScore = rolls[frameFirstRoll] + rolls[frameFirstRoll + 1];
 
-            totalScore += frameScore == MAX_PINS
-                    ? frameScore + rolls[frame + 2]
-                    : frameScore;
+            if (frameScore < MAX_PINS) {
+                totalScore += frameScore;
+            } else if (rolls[frameFirstRoll] != MAX_PINS) {
+                var spareBonus = rolls[frameFirstRoll + 2];
+                totalScore += frameScore + spareBonus;
+            } else if (rolls[frameFirstRoll] == MAX_PINS) {
+                var strikeBonus = rolls[frameFirstRoll + 2] + rolls[frameFirstRoll + 3];
+                totalScore += frameScore + strikeBonus;
+            }
         }
         return totalScore;
     }

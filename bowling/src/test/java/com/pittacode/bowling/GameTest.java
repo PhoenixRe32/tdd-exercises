@@ -1,6 +1,7 @@
 package com.pittacode.bowling;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,6 +37,19 @@ public class GameTest {
         underTest.roll(1);
 
         assertThat(underTest.score()).isEqualTo(17);
+    }
+
+    @Test
+    void shouldReturnCorrectScore_whenRollingAStrike() {
+        rollAStrike();
+        underTest.roll(3);
+        underTest.roll(1);
+
+        assertThat(underTest.score()).isEqualTo(18);
+    }
+
+    private void rollAStrike() {
+        underTest.roll(10);
     }
 
     private void rollASpare() {
