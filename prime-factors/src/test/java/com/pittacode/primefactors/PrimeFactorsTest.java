@@ -32,4 +32,22 @@ public class PrimeFactorsTest {
         var underTest = new PrimeFactors(4);
         assertThat(underTest.calculate()).containsExactly(2, 2);
     }
+
+    @Test
+    void shouldReturnPrimeFactors_whenNumberIs5() {
+        var underTest = new PrimeFactors(5);
+        assertThat(underTest.calculate()).containsExactly(5);
+    }
+
+    @Test
+    void shouldReturnPrimeFactors_whenNumberIs6() {
+        var underTest = new PrimeFactors(6);
+        assertThat(underTest.calculate()).containsExactly(2, 3);
+    }
+
+    @Test
+    void shouldReturnPrimeFactors_whenNumberIs100() {
+        var underTest = new PrimeFactors(100);
+        assertThat(underTest.calculate()).containsExactly(2, 2, 5, 5);
+    }
 }

@@ -24,6 +24,12 @@ public class PrimeFactors {
             } else if (intermediateNumber % 3 == 0) {
                 intermediateNumber /= 3;
                 result.add(3);
+            } else if (intermediateNumber % 5 == 0) {
+                intermediateNumber /= 5;
+                result.add(5);
+            } else if (intermediateNumber % 7 == 0) {
+                intermediateNumber /= 7;
+                result.add(7);
             } else {
                 var message = number + " couldn't be calculated.\n"
                         + "Factors calculated: " + result + "\n"
