@@ -19,14 +19,6 @@ public class Game {
         roll++;
     }
 
-    private boolean isStrike(int roll) {
-        return rolls[roll] == MAX_PINS && isFirstRollOfAFrame(roll);
-    }
-
-    private boolean isFirstRollOfAFrame(int roll) {
-        return roll % 2 == 0;
-    }
-
     public int score() {
         var totalScore = 0;
         var frame = 0;
