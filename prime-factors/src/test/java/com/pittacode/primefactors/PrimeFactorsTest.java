@@ -1,53 +1,35 @@
 package com.pittacode.primefactors;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PrimeFactorsTest {
 
     @ParameterizedTest
-    @ValueSource(ints = {1, 0, -20})
-    void shouldReturnEmptyList_whenLessThan2(int number) {
+    @MethodSource(value = "scenarios")
+    public void shouldReturnPrimeFactors(int number, List<Integer> primeFactors) {
         var underTest = new PrimeFactors(number);
-        assertThat(underTest.calculate()).isEmpty();
+        assertThat(underTest.calculate()).containsExactlyElementsOf(primeFactors);
     }
 
-    @Test
-    void shouldReturn2_whenNumberIs2() {
-        var underTest = new PrimeFactors(2);
-        assertThat(underTest.calculate()).containsExactly(2);
-    }
-
-    @Test
-    void shouldReturn3_whenNumberIs3() {
-        var underTest = new PrimeFactors(3);
-        assertThat(underTest.calculate()).containsExactly(3);
-    }
-
-    @Test
-    void shouldReturn2_2_whenNumberIs4() {
-        var underTest = new PrimeFactors(4);
-        assertThat(underTest.calculate()).containsExactly(2, 2);
-    }
-
-    @Test
-    void shouldReturnPrimeFactors_whenNumberIs5() {
-        var underTest = new PrimeFactors(5);
-        assertThat(underTest.calculate()).containsExactly(5);
-    }
-
-    @Test
-    void shouldReturnPrimeFactors_whenNumberIs6() {
-        var underTest = new PrimeFactors(6);
-        assertThat(underTest.calculate()).containsExactly(2, 3);
-    }
-
-    @Test
-    void shouldReturnPrimeFactors_whenNumberIs100() {
-        var underTest = new PrimeFactors(100);
-        assertThat(underTest.calculate()).containsExactly(2, 2, 5, 5);
+    private static Stream<Arguments> scenarios() {
+        return Stream.of(
+                Arguments.of(-100, List.of()),
+                Arguments.of(0, List.of()),
+                Arguments.of(1, List.of()),
+                Arguments.of(2, List.of(2)),
+                Arguments.of(3, List.of(3)),
+                Arguments.of(4, List.of(2, 2)),
+                Arguments.of(5, List.of(5)),
+                Arguments.of(6, List.of(2, 3)),
+                Arguments.of(7, List.of(7)),
+                Arguments.of(100, List.of(2, 2, 5, 5))
+        );
     }
 }
