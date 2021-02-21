@@ -5,10 +5,13 @@ import java.util.List;
 
 public class PrimeFactors {
 
+
+    private final List<Integer> primes;
     private final int number;
 
     public PrimeFactors(int number) {
         this.number = number;
+        primes = new LinkedList<>(List.of(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31));
     }
 
     public List<Integer> calculate() {
@@ -18,26 +21,20 @@ public class PrimeFactors {
         var result = new LinkedList<Integer>();
         var intermediateNumber = number;
         do {
-            if (intermediateNumber % 2 == 0) {
-                intermediateNumber /= 2;
-                result.add(2);
-            } else if (intermediateNumber % 3 == 0) {
-                intermediateNumber /= 3;
-                result.add(3);
-            } else if (intermediateNumber % 5 == 0) {
-                intermediateNumber /= 5;
-                result.add(5);
-            } else if (intermediateNumber % 7 == 0) {
-                intermediateNumber /= 7;
-                result.add(7);
-            } else {
-                var message = number + " couldn't be calculated.\n"
-                        + "Factors calculated: " + result + "\n"
-                        + "Remainder: " + intermediateNumber;
-                throw new UnsupportedOperationException(message);
-            }
+            var primeDivider = findSmallestPrimeDivider(intermediateNumber);
+            intermediateNumber /= primeDivider;
+            result.add(primeDivider);
         } while (intermediateNumber != 1);
 
         return result;
+    }
+
+    private int findSmallestPrimeDivider(int intermediateNumber) {
+        for (int prime : primes) {
+            if (intermediateNumber % prime == 0) {
+                return prime;
+            }
+        }
+        throw new RuntimeException("Could not find prime that perfectly divides " + intermediateNumber);
     }
 }
