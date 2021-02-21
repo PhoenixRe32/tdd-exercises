@@ -68,6 +68,17 @@ public class GameTest {
         assertThat(underTest.score()).isEqualTo(100);
     }
 
+    @Test
+    void shouldReturnCorrectScore_whenRollingAllGutterSparesAndAfinal9() {
+        for (int i = 0; i < FRAMES; i++) {
+            underTest.roll(0);
+            underTest.roll(10);
+        }
+        underTest.roll(9);
+
+        assertThat(underTest.score()).isEqualTo(109);
+    }
+
     private void rollAStrike() {
         underTest.roll(10);
     }
