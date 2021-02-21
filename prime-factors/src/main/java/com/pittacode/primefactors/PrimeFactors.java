@@ -5,7 +5,6 @@ import java.util.List;
 
 public class PrimeFactors {
 
-
     private final List<Integer> primes;
     private final int number;
 
@@ -18,13 +17,16 @@ public class PrimeFactors {
         if (number < 2)
             return List.of();
 
+        return calculate(number);
+    }
+
+    private List<Integer> calculate(int number) {
         var result = new LinkedList<Integer>();
-        var intermediateNumber = number;
         do {
-            var primeDivider = findSmallestPrimeDivider(intermediateNumber);
-            intermediateNumber /= primeDivider;
+            var primeDivider = findSmallestPrimeDivider(number);
+            number /= primeDivider;
             result.add(primeDivider);
-        } while (intermediateNumber != 1);
+        } while (number != 1);
 
         return result;
     }
@@ -35,6 +37,8 @@ public class PrimeFactors {
                 return prime;
             }
         }
-        throw new RuntimeException("Could not find prime that perfectly divides " + intermediateNumber);
+        throw new UnsupportedOperationException(
+                "Class doesn't support further factoring " + intermediateNumber + "\n"
+                        + "Only knows the following primes: " + primes);
     }
 }
