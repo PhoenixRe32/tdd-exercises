@@ -21,21 +21,39 @@ public class Game {
 
     public int score() {
         var totalScore = 0;
-        var frame = 0;
         var roll = 0;
-        while (frame < FRAMES) {
-            if (rolls[roll] == MAX_PINS) { // strike
-                totalScore += rolls[roll] + rolls[roll + 1] + rolls[roll + 2];
+        for (int frame = 0; frame < FRAMES; frame++) {
+            if (isStrike(roll)) {
+                totalScore += MAX_PINS + strikeBonus(roll);
                 roll += 1;
-            } else if (rolls[roll] + rolls[roll + 1] == MAX_PINS) { // spare
-                totalScore += rolls[roll] + rolls[roll + 1] + rolls[roll + 2];
+            } else if (isSpare(roll)) {
+                totalScore += MAX_PINS + spareBonus(roll);
                 roll += 2;
-            } else { // normal
-                totalScore += rolls[roll] + rolls[roll + 1];
+            } else {
+                totalScore += frameScore(roll);
                 roll += 2;
             }
-            frame++;
         }
         return totalScore;
+    }
+
+    private boolean isStrike(int roll) {
+        return rolls[roll] == MAX_PINS;
+    }
+
+    private int strikeBonus(int roll) {
+        return rolls[roll + 1] + rolls[roll + 2];
+    }
+
+    private boolean isSpare(int roll) {
+        return rolls[roll] + rolls[roll + 1] == MAX_PINS;
+    }
+
+    private int spareBonus(int roll) {
+        return rolls[roll + 2];
+    }
+
+    private int frameScore(int roll) {
+        return rolls[roll] + rolls[roll + 1];
     }
 }
