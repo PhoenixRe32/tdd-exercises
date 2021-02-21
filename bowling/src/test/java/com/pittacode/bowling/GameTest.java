@@ -29,6 +29,20 @@ public class GameTest {
         assertThat(underTest.score()).isEqualTo(20);
     }
 
+    @Test
+    void shouldReturnCorrectScore_whenRollingASpare() {
+        rollASpare();
+        underTest.roll(3);
+        underTest.roll(1);
+
+        assertThat(underTest.score()).isEqualTo(17);
+    }
+
+    private void rollASpare() {
+        underTest.roll(5);
+        underTest.roll(5);
+    }
+
     private void rollAll(int pins) {
         for (int i = 0; i < FRAMES; i++) {
             underTest.roll(pins);
