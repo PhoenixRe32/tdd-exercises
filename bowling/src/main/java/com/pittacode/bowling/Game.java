@@ -29,8 +29,9 @@ public class Game {
 
     public int score() {
         var totalScore = 0;
+        var frame = 0;
         var roll = 0;
-        while (roll < (FRAMES << 1)) {
+        while (frame < FRAMES) {
             if (rolls[roll] == MAX_PINS) { // strike
                 totalScore += rolls[roll] + rolls[roll + 1] + rolls[roll + 2];
                 roll += 1;
@@ -41,6 +42,7 @@ public class Game {
                 totalScore += rolls[roll] + rolls[roll + 1];
                 roll += 2;
             }
+            frame++;
         }
         return totalScore;
     }
