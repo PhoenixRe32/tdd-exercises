@@ -58,7 +58,7 @@ public class PrimeFactors {
     }
 
     private IntPredicate isDividerOf(int number) {
-        return i -> number / i == 0;
+        return i -> number % i == 0;
     }
 
 }
