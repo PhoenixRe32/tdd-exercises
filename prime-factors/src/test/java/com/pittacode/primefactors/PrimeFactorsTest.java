@@ -29,6 +29,8 @@ public class PrimeFactorsTest {
                 Arguments.of(5, List.of(5)),
                 Arguments.of(6, List.of(2, 3)),
                 Arguments.of(7, List.of(7)),
+                Arguments.of(74, List.of(2, 37)),
+                Arguments.of(148, List.of(2, 2, 37)),
                 Arguments.of(100, List.of(2, 2, 5, 5))
         );
     }
