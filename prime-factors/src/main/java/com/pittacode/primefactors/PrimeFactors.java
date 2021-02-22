@@ -27,8 +27,10 @@ public class PrimeFactors {
         var result = new LinkedList<Integer>();
         do {
             var primeDivider = findSmallestPrimeDivider(number);
-            number /= primeDivider;
-            result.add(primeDivider);
+            while (isPerfectlyDivided(number, primeDivider)) {
+                number /= primeDivider;
+                result.add(primeDivider);
+            }
         } while (number != 1);
 
         return result;
@@ -36,14 +38,17 @@ public class PrimeFactors {
 
     private int findSmallestPrimeDivider(int intermediateNumber) {
         for (int prime : PRIMES) {
-            if (intermediateNumber % prime == 0) {
+            if (isPerfectlyDivided(intermediateNumber, prime)) {
                 return prime;
             }
         }
+
+        return calculateNewPrime(intermediateNumber);
+    }
+
+    private int calculateNewPrime(int intermediateNumber) {
         if (isIntermediateNumberAPrime(intermediateNumber)) {
-            PRIMES.add(intermediateNumber);
-            PRIMES.sort(naturalOrder());
-            System.out.println("Added new prime: " + intermediateNumber);
+            updatePrimes(intermediateNumber);
             return intermediateNumber;
         }
 
@@ -52,13 +57,23 @@ public class PrimeFactors {
                         + "Only knows the following primes: " + PRIMES);
     }
 
+    private void updatePrimes(int intermediateNumber) {
+        PRIMES.add(intermediateNumber);
+        PRIMES.sort(naturalOrder());
+        System.out.println("Added new prime: " + intermediateNumber);
+    }
+
     private boolean isIntermediateNumberAPrime(int number) {
         return IntStream.range(2, number / 2)
                         .noneMatch(isDividerOf(number));
     }
 
     private IntPredicate isDividerOf(int number) {
-        return i -> number % i == 0;
+        return i -> isPerfectlyDivided(number, i);
+    }
+
+    private boolean isPerfectlyDivided(int number, int primeDivider) {
+        return number % primeDivider == 0;
     }
 
 }
