@@ -15,7 +15,8 @@ public class PrimeFactorsTest {
     @MethodSource(value = "scenarios")
     public void shouldReturnPrimeFactors(int number, List<Integer> primeFactors) {
         var underTest = new PrimeFactors(number);
-        assertThat(underTest.calculate()).containsExactlyElementsOf(primeFactors);
+        var result = underTest.calculate();
+        assertThat(result).containsExactlyElementsOf(primeFactors);
     }
 
     private static Stream<Arguments> scenarios() {
