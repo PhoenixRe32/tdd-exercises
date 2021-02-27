@@ -18,11 +18,20 @@ class IntersectionTest {
     void setUp() {
     }
 
-    @Test
-    void shouldReturn0_whenArraysHaveNothingInCommon() {
+    @ParameterizedTest
+    @MethodSource("arraysWithNoCommonElement")
+    void shouldReturn0_whenArraysHaveNothingInCommon(int[] array1, int[] array2) {
         var intersection = new Intersection();
-        var result = intersection.calculate(new int[]{1}, new int[]{2});
+        var result = intersection.calculate(array1, array2);
         assertThat(result).isEqualTo(0);
+    }
+
+    private static Stream<Arguments> arraysWithNoCommonElement() {
+        return Stream.of(
+                Arguments.of(new int[]{10, 3}, new int[]{4}),
+                Arguments.of(new int[]{10, 3}, new int[]{1, 5}),
+                Arguments.of(new int[]{10, 3, 5, 12, 54, 34}, new int[]{0, -10, -34, -23, -3})
+        );
     }
 
     @Test
