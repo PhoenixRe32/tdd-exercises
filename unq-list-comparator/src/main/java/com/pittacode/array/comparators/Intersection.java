@@ -3,6 +3,10 @@ package com.pittacode.array.comparators;
 public class Intersection {
 
     public int calculate(int[] arr1, int[] arr2) {
+        if (isAtLeastOneEmpty(arr1, arr2)) {
+            return 0;
+        }
+
         var commonElements = 0;
         for (int i = 0, length1 = arr1.length; i < length1; i++) {
             for (int j = 0, length2 = arr2.length; j < length2; j++) {
@@ -12,5 +16,9 @@ public class Intersection {
             }
         }
         return commonElements;
+    }
+
+    private boolean isAtLeastOneEmpty(int[] arr1, int[] arr2) {
+        return arr1.length == 0 || arr2.length == 0;
     }
 }

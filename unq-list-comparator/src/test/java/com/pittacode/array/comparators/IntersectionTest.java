@@ -34,11 +34,22 @@ class IntersectionTest {
         );
     }
 
-    @Test
-    void shouldReturn0_whenBothArraysAreEmpty() {
+    @ParameterizedTest
+    @MethodSource("arrays")
+    void shouldReturn0_whenOneArraysIsEmpty(int[] array) {
         var intersection = new Intersection();
-        var result = intersection.calculate(EMPTY_ARRAY, EMPTY_ARRAY);
+        var result = intersection.calculate(EMPTY_ARRAY, array);
         assertThat(result).isEqualTo(0);
+    }
+
+
+    private static Stream<int[]> arrays() {
+        return Stream.of(
+                EMPTY_ARRAY,
+                new int[]{10, 3},
+                new int[]{10, 3, 5, 12, 54, 34},
+                new int[]{0, -10, -34, -23, -3}
+        );
     }
 
     @Test
