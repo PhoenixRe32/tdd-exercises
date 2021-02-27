@@ -9,6 +9,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_PLACEHOLDER;
+import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_WITH_NAMES_PLACEHOLDER;
+import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
+import static org.junit.jupiter.params.ParameterizedTest.INDEX_PLACEHOLDER;
 
 class UniqueElementArrayIntersectionTest {
 
@@ -59,7 +63,7 @@ class UniqueElementArrayIntersectionTest {
         assertThat(result).isEqualTo(1);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = ARGUMENTS_PLACEHOLDER + " -> " + DISPLAY_NAME_PLACEHOLDER)
     @MethodSource("arraysWithOneCommonElement")
     void shouldReturn1_whenArraysAreOfDifferentSizeAndHaveOneCommonElement(int[] array1, int[] array2) {
         var intersection = new UniqueElementArrayIntersection();
