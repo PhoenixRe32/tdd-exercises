@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class IntersectionTest {
+class UniqueElementArrayIntersectionTest {
 
     public static final int[] EMPTY_ARRAY = new int[0];
 
@@ -21,7 +21,7 @@ class IntersectionTest {
     @ParameterizedTest
     @MethodSource("arraysWithNoCommonElement")
     void shouldReturn0_whenArraysHaveNothingInCommon(int[] array1, int[] array2) {
-        var intersection = new Intersection();
+        var intersection = new UniqueElementArrayIntersection();
         var result = intersection.calculate(array1, array2);
         assertThat(result).isEqualTo(0);
     }
@@ -37,7 +37,7 @@ class IntersectionTest {
     @ParameterizedTest
     @MethodSource("arrays")
     void shouldReturn0_whenOneArraysIsEmpty(int[] array) {
-        var intersection = new Intersection();
+        var intersection = new UniqueElementArrayIntersection();
         var result = intersection.calculate(EMPTY_ARRAY, array);
         assertThat(result).isEqualTo(0);
     }
@@ -54,7 +54,7 @@ class IntersectionTest {
 
     @Test
     void shouldReturn1_whenArraysAreEquivalent() {
-        var intersection = new Intersection();
+        var intersection = new UniqueElementArrayIntersection();
         var result = intersection.calculate(new int[]{3}, new int[]{3});
         assertThat(result).isEqualTo(1);
     }
@@ -62,7 +62,7 @@ class IntersectionTest {
     @ParameterizedTest
     @MethodSource("arraysWithOneCommonElement")
     void shouldReturn1_whenArraysAreOfDifferentSizeAndHaveOneCommonElement(int[] array1, int[] array2) {
-        var intersection = new Intersection();
+        var intersection = new UniqueElementArrayIntersection();
         var result = intersection.calculate(array1, array2);
         assertThat(result).isEqualTo(1);
     }

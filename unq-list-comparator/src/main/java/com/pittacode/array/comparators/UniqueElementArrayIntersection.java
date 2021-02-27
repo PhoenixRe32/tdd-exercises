@@ -1,6 +1,6 @@
 package com.pittacode.array.comparators;
 
-public class Intersection {
+public class UniqueElementArrayIntersection {
 
     public int calculate(int[] arr1, int[] arr2) {
         if (isAtLeastOneEmpty(arr1, arr2)) {
