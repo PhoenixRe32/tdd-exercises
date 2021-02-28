@@ -10,13 +10,11 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_PLACEHOLDER;
-import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_WITH_NAMES_PLACEHOLDER;
 import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
-import static org.junit.jupiter.params.ParameterizedTest.INDEX_PLACEHOLDER;
 
 class UniqueElementArrayIntersectionTest {
 
-    public static final int[] EMPTY_ARRAY = new int[0];
+    public static final Integer[] EMPTY_ARRAY = new Integer[0];
 
     @BeforeEach
     void setUp() {
@@ -24,7 +22,7 @@ class UniqueElementArrayIntersectionTest {
 
     @ParameterizedTest
     @MethodSource("arraysWithNoCommonElement")
-    void shouldReturn0_whenArraysHaveNothingInCommon(int[] array1, int[] array2) {
+    void shouldReturn0_whenArraysHaveNothingInCommon(Integer[] array1, Integer[] array2) {
         var intersection = new UniqueElementArrayIntersection();
         var result = intersection.calculate(array1, array2);
         assertThat(result).isEqualTo(0);
@@ -32,40 +30,40 @@ class UniqueElementArrayIntersectionTest {
 
     private static Stream<Arguments> arraysWithNoCommonElement() {
         return Stream.of(
-                Arguments.of(new int[]{10, 3}, new int[]{4}),
-                Arguments.of(new int[]{10, 3}, new int[]{1, 5}),
-                Arguments.of(new int[]{10, 3, 5, 12, 54, 34}, new int[]{0, -10, -34, -23, -3})
+                Arguments.of(new Integer[]{10, 3}, new Integer[]{4}),
+                Arguments.of(new Integer[]{10, 3}, new Integer[]{1, 5}),
+                Arguments.of(new Integer[]{10, 3, 5, 12, 54, 34}, new Integer[]{0, -10, -34, -23, -3})
         );
     }
 
     @ParameterizedTest
     @MethodSource("arrays")
-    void shouldReturn0_whenOneArraysIsEmpty(int[] array) {
+    void shouldReturn0_whenOneArraysIsEmpty(Integer[] arr1, Integer[] arr2) {
         var intersection = new UniqueElementArrayIntersection();
-        var result = intersection.calculate(EMPTY_ARRAY, array);
+        var result = intersection.calculate(arr1, arr2);
         assertThat(result).isEqualTo(0);
     }
 
 
-    private static Stream<int[]> arrays() {
+    private static Stream<Arguments> arrays() {
         return Stream.of(
-                EMPTY_ARRAY,
-                new int[]{10, 3},
-                new int[]{10, 3, 5, 12, 54, 34},
-                new int[]{0, -10, -34, -23, -3}
+                Arguments.of(EMPTY_ARRAY, EMPTY_ARRAY),
+                Arguments.of(new Integer[]{10, 3}, EMPTY_ARRAY),
+                Arguments.of(new Integer[]{10, 3, 5, 12, 54, 34}, EMPTY_ARRAY),
+                Arguments.of(new Integer[]{0, -10, -34, -23, -3}, EMPTY_ARRAY)
         );
     }
 
     @Test
     void shouldReturn1_whenArraysAreEquivalent() {
         var intersection = new UniqueElementArrayIntersection();
-        var result = intersection.calculate(new int[]{3}, new int[]{3});
+        var result = intersection.calculate(new Integer[]{3}, new Integer[]{3});
         assertThat(result).isEqualTo(1);
     }
 
     @ParameterizedTest(name = ARGUMENTS_PLACEHOLDER + " -> " + DISPLAY_NAME_PLACEHOLDER)
     @MethodSource("arraysWithOneCommonElement")
-    void shouldReturn1_whenArraysAreOfDifferentSizeAndHaveOneCommonElement(int[] array1, int[] array2) {
+    void shouldReturn1_whenArraysAreOfDifferentSizeAndHaveOneCommonElement(Integer[] array1, Integer[] array2) {
         var intersection = new UniqueElementArrayIntersection();
         var result = intersection.calculate(array1, array2);
         assertThat(result).isEqualTo(1);
@@ -73,9 +71,9 @@ class UniqueElementArrayIntersectionTest {
 
     private static Stream<Arguments> arraysWithOneCommonElement() {
         return Stream.of(
-                Arguments.of(new int[]{10, 3}, new int[]{3}),
-                Arguments.of(new int[]{10, 3}, new int[]{3, 5}),
-                Arguments.of(new int[]{10, 3, 5, 12, 54, 34}, new int[]{0, -10, -34, -23, 3})
+                Arguments.of(new Integer[]{10, 3}, new Integer[]{3}),
+                Arguments.of(new Integer[]{10, 3}, new Integer[]{3, 5}),
+                Arguments.of(new Integer[]{10, 3, 5, 12, 54, 34}, new Integer[]{0, -10, -34, -23, 3})
         );
     }
 }
