@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static com.pittacode.array.comparators.UniqueElementArrayIntersection.anIntegerUniqueElementArrayIntersection;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_PLACEHOLDER;
 import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
@@ -16,15 +17,17 @@ class UniqueElementArrayIntersectionTest {
 
     public static final Integer[] EMPTY_ARRAY = new Integer[0];
 
+    private UniqueElementArrayIntersection<Integer> underTest;
+
     @BeforeEach
     void setUp() {
+        underTest = anIntegerUniqueElementArrayIntersection();
     }
 
     @ParameterizedTest
     @MethodSource("arraysWithNoCommonElement")
     void shouldReturn0_whenArraysHaveNothingInCommon(Integer[] array1, Integer[] array2) {
-        var intersection = new UniqueElementArrayIntersection();
-        var result = intersection.calculate(array1, array2);
+        var result = underTest.calculate(array1, array2);
         assertThat(result).isEqualTo(0);
     }
 
@@ -39,8 +42,7 @@ class UniqueElementArrayIntersectionTest {
     @ParameterizedTest
     @MethodSource("arrays")
     void shouldReturn0_whenOneArraysIsEmpty(Integer[] arr1, Integer[] arr2) {
-        var intersection = new UniqueElementArrayIntersection();
-        var result = intersection.calculate(arr1, arr2);
+        var result = underTest.calculate(arr1, arr2);
         assertThat(result).isEqualTo(0);
     }
 
@@ -56,16 +58,14 @@ class UniqueElementArrayIntersectionTest {
 
     @Test
     void shouldReturn1_whenArraysAreEquivalent() {
-        var intersection = new UniqueElementArrayIntersection();
-        var result = intersection.calculate(new Integer[]{3}, new Integer[]{3});
+        var result = underTest.calculate(new Integer[]{3}, new Integer[]{3});
         assertThat(result).isEqualTo(1);
     }
 
     @ParameterizedTest(name = ARGUMENTS_PLACEHOLDER + " -> " + DISPLAY_NAME_PLACEHOLDER)
     @MethodSource("arraysWithOneCommonElement")
     void shouldReturn1_whenArraysAreOfDifferentSizeAndHaveOneCommonElement(Integer[] array1, Integer[] array2) {
-        var intersection = new UniqueElementArrayIntersection();
-        var result = intersection.calculate(array1, array2);
+        var result = underTest.calculate(array1, array2);
         assertThat(result).isEqualTo(1);
     }
 

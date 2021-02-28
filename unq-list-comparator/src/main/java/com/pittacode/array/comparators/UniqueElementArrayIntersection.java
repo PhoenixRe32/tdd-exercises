@@ -4,9 +4,13 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Objects;
 
-public class UniqueElementArrayIntersection {
+public class UniqueElementArrayIntersection<T extends Comparable<T>> {
 
-    public <T extends Comparable<T>> int calculate(T[] arr1, T[] arr2) {
+    public static UniqueElementArrayIntersection<Integer> anIntegerUniqueElementArrayIntersection() {
+        return new UniqueElementArrayIntersection<>();
+    }
+
+    public int calculate(T[] arr1, T[] arr2) {
         if (isAtLeastOneEmpty(arr1, arr2)) {
             return 0;
         }
@@ -15,16 +19,16 @@ public class UniqueElementArrayIntersection {
         return countCommonElementsInSortedArrays(arr1, arr2);
     }
 
-    private <T extends Comparable<T>> boolean isAtLeastOneEmpty(T[] arr1, T[] arr2) {
+    private boolean isAtLeastOneEmpty(T[] arr1, T[] arr2) {
         return arr1.length == 0 || arr2.length == 0;
     }
 
-    private <T extends Comparable<T>> void sortArrays(T[] shorterArray, T[] longerArray) {
+    private void sortArrays(T[] shorterArray, T[] longerArray) {
         Arrays.sort(shorterArray);
         Arrays.sort(longerArray);
     }
 
-    private <T extends Comparable<T>> int countCommonElementsInSortedArrays(T[] arr1, T[] arr2) {
+    private int countCommonElementsInSortedArrays(T[] arr1, T[] arr2) {
         var count = 0;
 
         int iter1 = 0;
