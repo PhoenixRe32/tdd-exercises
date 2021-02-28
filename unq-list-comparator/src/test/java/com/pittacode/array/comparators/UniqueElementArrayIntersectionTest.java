@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.pittacode.array.comparators.UniqueElementArrayIntersection.anIntegerUniqueElementArrayIntersection;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_PLACEHOLDER;
 import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
@@ -21,7 +20,7 @@ class UniqueElementArrayIntersectionTest {
 
     @BeforeEach
     void setUp() {
-        underTest = anIntegerUniqueElementArrayIntersection();
+        underTest = new UniqueElementArrayIntersection<>(Integer.class);
     }
 
     @ParameterizedTest

@@ -6,8 +6,7 @@ import java.util.Objects;
 
 public class UniqueElementArrayIntersection<T extends Comparable<T>> {
 
-    public static UniqueElementArrayIntersection<Integer> anIntegerUniqueElementArrayIntersection() {
-        return new UniqueElementArrayIntersection<>();
+    public UniqueElementArrayIntersection(Class<T> type) {
     }
 
     public int calculate(T[] arr1, T[] arr2) {
