@@ -15,7 +15,7 @@ public class PrimeFactors {
     private List<Integer> calculateForValid(int number) {
         var result = new LinkedList<Integer>();
         var intermediateDivisionResult = number;
-        for (int primeDivider = 2; primeDivider <= number && intermediateDivisionResult !=1 ; primeDivider++) {
+        for (int primeDivider = 2; primeDivider <= number && intermediateDivisionResult != 1; primeDivider++) {
             while (isPerfectlyDivided(intermediateDivisionResult, primeDivider)) {
                 intermediateDivisionResult /= primeDivider;
                 result.add(primeDivider);
