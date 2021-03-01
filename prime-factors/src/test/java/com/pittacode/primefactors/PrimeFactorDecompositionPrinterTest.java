@@ -27,6 +27,7 @@ public class PrimeFactorDecompositionPrinterTest {
                 arguments(13, "(13)"),
                 arguments(16, "(2**4)"),
                 arguments(100, "(2**2)(5**2)"),
+                arguments(7775460, "(2**2)(3**3)(5)(7)(11**2)(17)"),
                 arguments(86240, "(2**5)(5)(7**2)(11)")
         );
     }

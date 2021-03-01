@@ -1,5 +1,6 @@
 package com.pittacode.primefactors;
 
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.StringJoiner;
 import java.util.function.Function;
@@ -20,7 +21,7 @@ public class PrimeFactorDecompositionPrinter {
     public String print(int number) {
         return primeFactors.calculateFor(number)
                            .stream()
-                           .collect(groupingBy(identity(), counting()))
+                           .collect(groupingBy(identity(), LinkedHashMap::new, counting()))
                            .entrySet()
                            .stream()
                            .map(this::toString)
