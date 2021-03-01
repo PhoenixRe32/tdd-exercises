@@ -14,8 +14,8 @@ public class PrimeFactorsTest {
     @ParameterizedTest
     @MethodSource(value = "scenarios")
     public void shouldReturnPrimeFactors(int number, List<Integer> primeFactors) {
-        var underTest = new PrimeFactors(number);
-        var result = underTest.calculate();
+        var underTest = new PrimeFactors();
+        var result = underTest.calculateFor(number);
         assertThat(result).containsExactlyElementsOf(primeFactors);
     }
 
