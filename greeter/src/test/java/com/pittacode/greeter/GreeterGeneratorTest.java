@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import static com.pittacode.greeter.greeting.factory.GreetingFactoryProvider.aMixedGreetingFactory;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GreeterGeneratorTest {
@@ -13,9 +14,7 @@ public class GreeterGeneratorTest {
 
     @BeforeEach
     void setUp() {
-        var nameInputProcessor = new NameProcessor();
-        var greetingFactory = new MixedGreetingFactory(new NormalGreeter(), new ShoutingGreeter(), new NameFilter());
-        underTest = new GreeterGenerator(nameInputProcessor, greetingFactory);
+        underTest = new GreeterGenerator(new NameProcessor(), aMixedGreetingFactory());
     }
 
     @Test

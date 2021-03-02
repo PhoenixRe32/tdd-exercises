@@ -1,4 +1,4 @@
-package com.pittacode.greeter;
+package com.pittacode.greeter.greeting.factory;
 
 import java.util.ArrayList;
 import java.util.List;

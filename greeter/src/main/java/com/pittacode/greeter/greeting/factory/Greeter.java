@@ -1,4 +1,4 @@
-package com.pittacode.greeter;
+package com.pittacode.greeter.greeting.factory;
 
 @FunctionalInterface
 public interface Greeter {

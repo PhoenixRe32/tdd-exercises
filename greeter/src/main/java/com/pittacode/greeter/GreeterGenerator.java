@@ -1,5 +1,7 @@
 package com.pittacode.greeter;
 
+import com.pittacode.greeter.greeting.factory.GreetingFactory;
+
 public class GreeterGenerator {
 
     private static final String NO_NAME_GREETING = "Hello, my friend.";

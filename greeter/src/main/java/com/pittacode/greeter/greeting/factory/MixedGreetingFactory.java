@@ -1,6 +1,6 @@
-package com.pittacode.greeter;
+package com.pittacode.greeter.greeting.factory;
 
-import com.pittacode.greeter.NameFilter.Names;
+import com.pittacode.greeter.greeting.factory.NameFilter.Names;
 
 class MixedGreetingFactory implements GreetingFactory {
 
