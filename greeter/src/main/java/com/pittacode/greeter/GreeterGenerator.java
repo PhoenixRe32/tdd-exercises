@@ -5,15 +5,12 @@ public class GreeterGenerator {
     private static final String NO_NAME_GREETING = "Hello, my friend.";
 
     private final NameProcessor nameProcessor;
-    private final NameFilter nameFilter;
-    private final GreeterJoiner greeterJoiner;
+    private final GreetingFactory greetingFactory;
 
     public GreeterGenerator(NameProcessor nameProcessor,
-                            NameFilter nameFilter,
-                            GreeterJoiner greeterJoiner) {
+                            GreetingFactory greetingFactory) {
         this.nameProcessor = nameProcessor;
-        this.nameFilter = nameFilter;
-        this.greeterJoiner = greeterJoiner;
+        this.greetingFactory = greetingFactory;
     }
 
     public String buildGreeting(String name) {
@@ -27,10 +24,8 @@ public class GreeterGenerator {
     }
 
     public String buildGreeting(String[] names) {
-        String[] processedNames = nameProcessor.splitAnyCommaSeparatedEntriesToSingleNames(names);
+        String[] distinctNames = nameProcessor.splitAnyCommaSeparatedEntriesToSingleNames(names);
 
-        var filteredNames = nameFilter.filterNames(processedNames);
-
-        return greeterJoiner.joinGreetings(filteredNames);
+        return greetingFactory.generateGreeting(distinctNames);
     }
 }
