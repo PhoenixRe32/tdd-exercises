@@ -15,3 +15,8 @@ Rating: Easy
 A Solution: https://github.com/WolfgangOfner/TDD-Kata/tree/master/WordWrapper
 
 Source: http://codingdojo.org/kata/WordWrap/
+
+#### Additional Detail
+I have added the implementation detail that word boundaries are not just spaces 
+but also commas, fullstops, semicolons. Because sometimes these are not followed
+by a space (human error)
