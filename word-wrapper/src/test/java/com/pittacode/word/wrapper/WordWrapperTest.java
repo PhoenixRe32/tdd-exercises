@@ -2,14 +2,8 @@ package com.pittacode.word.wrapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_PLACEHOLDER;
-import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
 
 class WordWrapperTest {
 
@@ -20,32 +14,21 @@ class WordWrapperTest {
         underTest = new WordWrapper();
     }
 
-    @ParameterizedTest(name = ARGUMENTS_PLACEHOLDER + " -> " + DISPLAY_NAME_PLACEHOLDER)
-    @ValueSource(strings = {
-            "word1 word2",
-            "word1, word2",
-            "word1. word2",
-            "word1; word2",
-            "word1: word2",
-    })
-    void should_split_words(String words) {
-        var result = underTest.splitWords(words);
+    @Test
+    void should_split_sentence_in_correct_places1() {
+        var sentence = "word1 word2 word3 word4 word5 word6 word7 word8 word9 word0";
+        var expected = "word1 word2 word3 word4\nword5 word6 word7 word8\nword9 word0";
+        var result = underTest.wrap(sentence, 25);
 
-        assertThat(result).hasSize(2);
-        assertThat(result[0]).startsWith("word1");
-        assertThat(result[1]).startsWith("word2");
+        assertThat(result).isEqualTo(expected);
     }
 
-    @ParameterizedTest(name = ARGUMENTS_PLACEHOLDER + " -> " + DISPLAY_NAME_PLACEHOLDER)
-    @ValueSource(strings = {
-            "word1:word2",
-            "word1-word2",
-            "word1_word2",
-    })
-    void should_not_split_words(String words) {
-        var result = underTest.splitWords(words);
+    @Test
+    void should_split_sentence_in_correct_places2() {
+        var sentence = "word1 word2 word3 word4 word5 word66 word7:word8 word9 word0";
+        var expected = "word1 word2 word3\nword4 word5\nword66\nword7:word8 word9\nword0";
+        var result = underTest.wrap(sentence, 17);
 
-        assertThat(result).hasSize(1);
-        assertThat(result[0]).startsWith("word1");
+        assertThat(result).isEqualTo(expected);
     }
 }
