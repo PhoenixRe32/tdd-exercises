@@ -58,7 +58,7 @@ public class WordWrapper2 {
 
     private int walkBackwardsWhile(Predicate<Integer> predicate, int start) {
         var count = 0;
-        while (start - count >= 0 && predicate.test(start - count)) {
+        while (start - count > 0 && predicate.test(start - count)) {
             count += 1;
         }
         return count;
