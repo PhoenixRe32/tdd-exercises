@@ -1,40 +1,81 @@
 package com.pittacode.word.wrapper;
 
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
+import java.util.function.Predicate;
 
 import static java.lang.System.lineSeparator;
+import static java.util.function.Predicate.not;
 
 public class WordWrapper {
 
     private static final char SPACE = ' ';
-    private static final Pattern WORD_SEPARATORS = Pattern.compile("\\s+");
+    private static final char SEMICOLON = ';';
+    private static final char COMMA = ',';
+    private static final char PERIOD = '.';
+    private static final char TAB = '\t';
+    private static final Collection<Character> WORD_SEPARATORS = Set.of(SPACE, SEMICOLON, COMMA, PERIOD, TAB);
 
-    public String wrap(String sentence, int column) {
-        var words = splitWords(sentence);
-        var wrappedSentence = new StringBuilder(sentence.length());
+    private final String sentence;
+
+    public WordWrapper(String sentence) {
+        this.sentence = sentence;
+    }
+
+    public String wrap(int columnLimit) {
+        var wrappedSentence = new StringBuilder();
         var currentLineLength = 0;
-        for (var word : words) {
-            if (column - (currentLineLength + word.length()) == 0) {
-                wrappedSentence.append(word).append(lineSeparator());
-                currentLineLength = 0;
-            } else if (column - (currentLineLength + word.length()) > 0) {
-                wrappedSentence.append(word).append(SPACE);
-                currentLineLength += word.length() + 1;
+        for (var token : splitTokens()) {
+            if (currentLineLength + token.length() <= columnLimit) {
+                wrappedSentence.append(token);
+                currentLineLength += token.length();
             } else {
-                deleteLastCharacter(wrappedSentence);
-                wrappedSentence.append(lineSeparator()).append(word).append(SPACE);
-                currentLineLength = word.length() + 1;
+                wrappedSentence.append(lineSeparator()).append(token);
+                currentLineLength = token.length();
             }
         }
-        deleteLastCharacter(wrappedSentence);
         return wrappedSentence.toString();
     }
 
-    private void deleteLastCharacter(StringBuilder wrappedSentence) {
-        wrappedSentence.deleteCharAt(wrappedSentence.length() - 1);
+
+    public String[] splitTokens() {
+        var index = 0;
+        var tokens = new ArrayList<String>();
+        while (index < sentence.length()) {
+            var token = nextToken(index);
+            tokens.add(token);
+            index += token.length();
+        }
+        return tokens.toArray(new String[0]);
     }
 
-    public String[] splitWords(String words) {
-        return WORD_SEPARATORS.split(words);
+    public String nextToken(int start) {
+        var index = start;
+
+        index += countCharacters(not(matchingWordSeparator()), index);
+
+        if (index == sentence.length()) {
+            return sentence.substring(start);
+        }
+
+        index += countCharacters(matchingWordSeparator(), index);
+        return sentence.substring(start, index);
+    }
+
+    private int countCharacters(Predicate<Integer> predicate, int start) {
+        var count = 0;
+        while (start + count < sentence.length() && predicate.test(start + count)) {
+            count += 1;
+        }
+        return count;
+    }
+
+    private boolean isWordSeparator(char currentChar) {
+        return WORD_SEPARATORS.contains(currentChar);
+    }
+
+    private Predicate<Integer> matchingWordSeparator() {
+        return index -> isWordSeparator(sentence.charAt(index));
     }
 }
