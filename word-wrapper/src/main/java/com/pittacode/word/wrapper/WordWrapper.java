@@ -38,8 +38,7 @@ public class WordWrapper {
         return wrappedSentence.toString();
     }
 
-
-    public String[] splitTokens() {
+    private String[] splitTokens() {
         var index = 0;
         var tokens = new ArrayList<String>();
         while (index < sentence.length()) {
@@ -50,7 +49,7 @@ public class WordWrapper {
         return tokens.toArray(new String[0]);
     }
 
-    public String nextToken(int start) {
+    private String nextToken(int start) {
         var index = start;
 
         index += countCharacters(not(matchingWordSeparator()), index);
