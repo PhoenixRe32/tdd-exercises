@@ -53,10 +53,17 @@ public class RomanNumeral {
     }
 
     private boolean isSymbolFollowedByBiggerSymbol(int index) {
-        return (index + 1) < symbols.size()
+        return isNotLastSymbol(index)
                 && symbols.get(index + 1).getValue() > symbols.get(index).getValue();
     }
 
+    private boolean isNotLastSymbol(int index) {
+        return (index + 1) < symbols.size();
+    }
+
+    // NOTE: this can also be achieve by changing the enum
+    // Instead of having a subtractable property
+    // we can have the symbol that can be sutracted by the roman numeral.
     private boolean areSymbolsWithinSameOrderOfMagnitude(int i) {
         return symbols.get(i + 1).ordinal() - symbols.get(i).ordinal() <= 2;
     }

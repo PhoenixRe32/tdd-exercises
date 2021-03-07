@@ -1160,6 +1160,7 @@ class RomanConverterTest {
                 arguments("MCD", 1400),
                 arguments("MD", 1500),
                 arguments("MDC", 1600),
+                arguments("MDCLXVI", 1666),
                 arguments("MCM", 1900),
 
                 arguments("MCMI", 1901),
@@ -1183,7 +1184,8 @@ class RomanConverterTest {
                 arguments("MCMXCVII", 1997),
                 arguments("MCMXCVIII", 1998),
                 arguments("MCMXCIX", 1999),
-                arguments("MM", 2000)
+                arguments("MM", 2000),
+                arguments("MMVIII", 2008)
         );
     }
 
