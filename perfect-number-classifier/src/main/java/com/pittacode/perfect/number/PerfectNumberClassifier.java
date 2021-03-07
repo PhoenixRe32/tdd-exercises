@@ -12,6 +12,7 @@ public class PerfectNumberClassifier {
     }
 
     private LongStream getFactorsStream(long number) {
-        return (calculateFactors(number).stream().mapToLong(Long::longValue));
+        return calculateFactors(number).stream()
+                                       .mapToLong(Long::longValue);
     }
 }
