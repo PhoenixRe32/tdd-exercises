@@ -1,14 +1,13 @@
 package com.pittacode.perfect.number;
 
-import java.util.List;
 import java.util.stream.LongStream;
 
-import static com.pittacode.perfect.number.FactorisationSupport.*;
+import static com.pittacode.perfect.number.FactorisationSupport.calculateFactors;
 
 public class PerfectNumberClassifier {
 
     public boolean isPerfect(long number) {
-        return getFactorsStream(number).sum() - number == 0;
+        return getFactorsStream(number).sum() - number == number;
 
     }
 
