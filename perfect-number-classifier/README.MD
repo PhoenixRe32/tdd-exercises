@@ -12,6 +12,7 @@ Write a function that can classify if the given integer is a perfect number.
 
 ### First few perfect numbers
 
+* 6
 * 28
 * 496
 * 8128
