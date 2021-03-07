@@ -13,7 +13,7 @@ public final class FactorisationSupport {
 
     public static Set<Long> calculateFactors(long number) {
         return LongStream.rangeClosed(1, roundUpsquareRoot(number))
-                         .filter(l -> isDivisible(number, l))
+                         .filter(l -> isFactor(number, l))
                          .mapToObj(l -> getTheFactorPair(number, l))
                          .flatMap(Collection::stream)
                          .collect(toUnmodifiableSet());
@@ -23,7 +23,7 @@ public final class FactorisationSupport {
         return Double.valueOf(ceil(sqrt(number))).longValue();
     }
 
-    private static boolean isDivisible(long number, long i) {
+    private static boolean isFactor(long number, long i) {
         return number % i == 0;
     }
 
