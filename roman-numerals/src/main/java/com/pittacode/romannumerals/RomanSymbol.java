@@ -7,6 +7,8 @@ import static java.util.function.Predicate.not;
 import static java.util.stream.Collectors.toList;
 
 public enum RomanSymbol {
+
+    // NOTE: I actually depend on the order of this to do some stuff... Not optimum but too late to change
     I(1, true),
     V(5, false),
     X(10, true),
