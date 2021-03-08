@@ -4,12 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class RomanConverterTest {
@@ -19,15 +17,6 @@ class RomanConverterTest {
     @BeforeEach
     void setUp() {
         underTest = new RomanConverter();
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "A", "B", "E", "F", "G", "H",
-            "J", "K", "N", "O", "P", "Q",
-            "R", "S", "T", "U", "W", "Y", "Z"})
-    void whenPasssingInvalidCharacter_throwException(String input) {
-        assertThatThrownBy(() -> underTest.convert(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
@@ -1188,16 +1177,4 @@ class RomanConverterTest {
                 arguments("MMVIII", 2008)
         );
     }
-
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "IL", "IC", "ID", "IM",
-            "VX", "VL", "VC", "VD", "VM",
-            "XD", "XM",
-            "LC", "LD", "LM",
-            "DM"})
-    void whenPassingInvalidSubtractionRomanNumerals_throwException(String input) {
-        assertThatThrownBy(() -> underTest.convert(input)).isInstanceOf(IllegalArgumentException.class);
-    }
-
 }

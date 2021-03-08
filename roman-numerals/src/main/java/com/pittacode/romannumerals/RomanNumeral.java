@@ -3,6 +3,7 @@ package com.pittacode.romannumerals;
 import java.util.List;
 
 import static java.lang.String.format;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 public class RomanNumeral {
@@ -68,7 +69,7 @@ public class RomanNumeral {
         return symbols.get(i + 1).ordinal() - symbols.get(i).ordinal() <= 2;
     }
 
-    public int calculate() {
+    public int decimalValue() {
         var sum = 0;
 
         for (int i = 0; i < symbols.size(); i++) {
@@ -79,5 +80,11 @@ public class RomanNumeral {
         }
 
         return sum;
+    }
+
+    public String romanValue() {
+        return symbols.stream()
+                      .map(RomanSymbol::toString)
+                      .collect(joining());
     }
 }
