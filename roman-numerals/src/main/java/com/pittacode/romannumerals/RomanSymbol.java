@@ -9,7 +9,6 @@ import static java.util.stream.Collectors.toList;
 
 public enum RomanSymbol {
 
-    // NOTE: I actually depend on the order of this to do some stuff... Not optimum but too late to change
     I(1, true, 1),
     V(5, false, 2),
     X(10, true, 3),
@@ -49,6 +48,10 @@ public enum RomanSymbol {
 
     public int getValue() {
         return value;
+    }
+
+    public int getOrdinal() {
+        return ordinal;
     }
 
     public boolean isSubtractable() {

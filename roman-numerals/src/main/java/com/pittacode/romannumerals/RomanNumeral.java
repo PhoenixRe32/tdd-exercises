@@ -108,7 +108,7 @@ public class RomanNumeral {
     // Instead of having a subtractable property
     // we can have the symbol that can be sutracted by the roman numeral.
     private boolean areSymbolsWithinSameOrderOfMagnitude(int i) {
-        return symbols.get(i + 1).ordinal() - symbols.get(i).ordinal() <= 2;
+        return symbols.get(i + 1).getOrdinal() - symbols.get(i).getOrdinal() <= 2;
     }
 
     public int decimalValue() {
