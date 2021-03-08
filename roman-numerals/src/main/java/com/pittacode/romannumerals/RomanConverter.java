@@ -6,4 +6,9 @@ public class RomanConverter {
         var romanNumeral = new RomanNumeral(romanNumber);
         return romanNumeral.decimalValue();
     }
+
+    public String convert(int decimalNumber) {
+        var romanNumeral = new RomanNumeral(decimalNumber);
+        return romanNumeral.romanValue();
+    }
 }

@@ -8,6 +8,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_WITH_NAMES_PLACEHOLDER;
+import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class RomanConverterTest {
@@ -19,12 +21,20 @@ class RomanConverterTest {
         underTest = new RomanConverter();
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = ARGUMENTS_WITH_NAMES_PLACEHOLDER + " --> " + DISPLAY_NAME_PLACEHOLDER)
     @MethodSource("romanNumeralsAndTheirValues")
     void romanNumeralInput_convertsToTheExpectedValue(String romanNumeral, int decimalValue) {
         var result = underTest.convert(romanNumeral);
 
         assertThat(result).isEqualTo(decimalValue);
+    }
+
+    @ParameterizedTest(name = ARGUMENTS_WITH_NAMES_PLACEHOLDER + " --> " + DISPLAY_NAME_PLACEHOLDER)
+    @MethodSource("romanNumeralsAndTheirValues")
+    void decimalNumeralInput_convertsToTheExpectedRomanValue(String romanNumeral, int decimalValue) {
+        var result = underTest.convert(decimalValue);
+
+        assertThat(result).isEqualTo(romanNumeral);
     }
 
     private static Stream<Arguments> romanNumeralsAndTheirValues() {

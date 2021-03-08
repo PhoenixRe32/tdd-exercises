@@ -13,11 +13,53 @@ public class RomanNumeral {
     public static final String SUBTRACT_ERROR
             = "Can't subtract %s from %s. " + MAGNITUDE_WARNING;
     private static final String REPEAT_ERROR
-            = "Non subtractable symbol (" + RomanSymbol.getNonSubtractable() + ") repeated [%s at position %d]";
+            = "Non subtractable symbol (" + RomanSymbol.getNonSubtractableSymbols() + ") repeated [%s at position %d]";
     private static final String ORDER_ERROR
-            = "Non subtractable symbol (" + RomanSymbol.getNonSubtractable() + ") followed by a bigger symbol [%s at position %d]";
+            = "Non subtractable symbol (" + RomanSymbol.getNonSubtractableSymbols() + ") followed by a bigger symbol [%s at position %d]";
 
     private final List<RomanSymbol> symbols;
+
+    public static String convert(int decimalNumber) {
+        var thousands = decimalNumber / 1000;
+        if (thousands >= 1) {
+            return convertMultiplesOf10(thousands, RomanSymbol.M)
+                    + convert(decimalNumber - thousands * 1_000);
+        }
+
+        var hundreds = decimalNumber / 100;
+        if (hundreds >= 1) {
+            return convertMultiplesOf10(hundreds, RomanSymbol.C)
+                    + convert(decimalNumber - hundreds * 100);
+        }
+
+        var tens = decimalNumber / 10;
+        if (tens >= 1) {
+            return convertMultiplesOf10(tens, RomanSymbol.X)
+                    + convert(decimalNumber - tens * 10);
+        }
+
+        return convertMultiplesOf10(decimalNumber, RomanSymbol.I);
+    }
+
+    private static String convertMultiplesOf10(int units, RomanSymbol magnituteSymbol) {
+        if (units == 9) {
+            return magnituteSymbol.name() + magnituteSymbol.getNextMagnitude().name();
+        }
+        if (units > 5) {
+            return magnituteSymbol.getHalfwayMagnitude().name() + magnituteSymbol.name().repeat(units - 5);
+        }
+        if (units == 5) {
+            return magnituteSymbol.getHalfwayMagnitude().name();
+        }
+        if (units == 4) {
+            return magnituteSymbol.name() + magnituteSymbol.getHalfwayMagnitude().name();
+        }
+        return magnituteSymbol.name().repeat(units);
+    }
+
+    public RomanNumeral(int decimalNumber) {
+        this(convert(decimalNumber));
+    }
 
     public RomanNumeral(String romanNumber) {
         symbols = romanNumber.chars()
@@ -84,7 +126,7 @@ public class RomanNumeral {
 
     public String romanValue() {
         return symbols.stream()
-                      .map(RomanSymbol::toString)
+                      .map(RomanSymbol::name)
                       .collect(joining());
     }
 }
