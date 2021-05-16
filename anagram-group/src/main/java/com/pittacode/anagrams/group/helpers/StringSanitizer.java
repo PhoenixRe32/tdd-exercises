@@ -1,5 +1,6 @@
 package com.pittacode.anagrams.group.helpers;
 
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class StringSanitizer {
@@ -12,7 +13,8 @@ public class StringSanitizer {
         var sanitizedString = input.codePoints()
                                    .mapToObj(i -> Character.isAlphabetic(i) ? (char) i : SPACE)
                                    .collect(CharacterHelpers.characterCollector());
-        return normaliseSpace(sanitizedString);
+        var withNormalSpacing = normaliseSpace(sanitizedString);
+        return withNormalSpacing.toUpperCase(Locale.ROOT);
     }
 
     public String sanitizeUsingRegExp(String input) {

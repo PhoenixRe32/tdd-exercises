@@ -39,4 +39,10 @@ public class StringSanitizerTest {
         var result  = underTest.sanitize("A    A !@££ 2!@£A");
         assertThat(result).isEqualTo("A A A");
     }
+
+    @Test
+    void shouldConvertAllToUpperCase() {
+        var result  = underTest.sanitize("abcDEFgHZ");
+        assertThat(result).isEqualTo("ABCDEFGHZ");
+    }
 }
