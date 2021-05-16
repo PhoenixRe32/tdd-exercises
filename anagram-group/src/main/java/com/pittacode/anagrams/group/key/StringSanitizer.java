@@ -1,9 +1,9 @@
-package com.pittacode.anagrams.group.helpers;
+package com.pittacode.anagrams.group.key;
 
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-public class StringSanitizer {
+class StringSanitizer {
 
     private static final char SPACE = ' ';
     private static final Pattern NON_ALPHABETIC = Pattern.compile("[^a-zA-Z ]");

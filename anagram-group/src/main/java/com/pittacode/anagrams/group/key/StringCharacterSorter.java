@@ -1,11 +1,11 @@
-package com.pittacode.anagrams.group.helpers;
+package com.pittacode.anagrams.group.key;
 
 import java.util.regex.Pattern;
 
-import static com.pittacode.anagrams.group.helpers.CharacterHelpers.characterCollector;
+import static com.pittacode.anagrams.group.key.CharacterHelpers.characterCollector;
 import static java.util.Objects.requireNonNull;
 
-public class StringCharacterSorter {
+class StringCharacterSorter {
 
     private static final Pattern SPACE = Pattern.compile("\\s");
     private static final String EMPTY = "";

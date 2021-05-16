@@ -1,4 +1,4 @@
-package com.pittacode.anagrams.group.helpers;
+package com.pittacode.anagrams.group.key;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

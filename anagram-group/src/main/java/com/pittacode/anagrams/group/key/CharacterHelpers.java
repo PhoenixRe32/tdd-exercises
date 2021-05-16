@@ -1,4 +1,4 @@
-package com.pittacode.anagrams.group.helpers;
+package com.pittacode.anagrams.group.key;
 
 import java.util.stream.Collector;
 

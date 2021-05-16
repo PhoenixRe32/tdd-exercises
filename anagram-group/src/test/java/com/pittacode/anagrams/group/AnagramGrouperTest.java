@@ -1,19 +1,17 @@
 package com.pittacode.anagrams.group;
 
-import com.pittacode.anagrams.group.helpers.StringCharacterSorter;
-import com.pittacode.anagrams.group.helpers.StringSanitizer;
+import com.pittacode.anagrams.group.key.KeyGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import static com.pittacode.anagrams.group.key.KeyGenerator.keyGenerator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnagramGrouperTest {
 
     private AnagramGrouper underTest;
-    private StringSanitizer stringSanitizer;
-    private StringCharacterSorter stringCharacterSorter;
 
     @Nested
     @DisplayName("When single string is passed")
@@ -21,9 +19,7 @@ public class AnagramGrouperTest {
 
         @BeforeEach
         void setUp() {
-            stringSanitizer = new StringSanitizer();
-            stringCharacterSorter = new StringCharacterSorter();
-            underTest = new AnagramGrouper(stringSanitizer, stringCharacterSorter);
+            underTest = new AnagramGrouper(keyGenerator());
         }
 
         @Test
@@ -31,7 +27,6 @@ public class AnagramGrouperTest {
             var result = underTest.group("First String");
             assertThat(result).hasSize(1);
         }
-
 
         @Test
         void shouldHaveTheSortedStringCharactersAsKey() {
