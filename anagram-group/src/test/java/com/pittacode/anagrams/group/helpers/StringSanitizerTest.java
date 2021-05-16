@@ -19,19 +19,19 @@ public class StringSanitizerTest {
     @Test
     void shouldRemoveNonAlphanumericCharactersFromString() {
         var result  = underTest.sanitize(NON_ALPHABETIC_CHARS);
-        assertThat(result.isBlank()).isTrue();
+        assertThat(result).isBlank();
     }
 
     @Test
     void shouldRemoveNonAlphanumericCharactersFromStringUsingRegExp() {
         var result  = underTest.sanitizeUsingRegExp(NON_ALPHABETIC_CHARS);
-        assertThat(result.isBlank()).isTrue();
+        assertThat(result).isBlank();
     }
 
     @Test
     void shouldReduceMultipleEmptySpacesToSingleSpace() {
         var result = underTest.sanitize(NON_ALPHABETIC_CHARS);
-        assertThat(result.length()).isEqualTo(1);
+        assertThat(result).hasSize(1);
     }
 
     @Test

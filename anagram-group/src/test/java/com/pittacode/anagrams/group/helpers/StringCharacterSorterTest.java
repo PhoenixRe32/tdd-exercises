@@ -46,7 +46,7 @@ public class StringCharacterSorterTest {
     @Test
     void shouldReturnStringWithSameNumberOfNonWhitespaceCharacters() {
         var result = underTest.sort("aaa aaa");
-        assertThat(result.length()).isEqualTo(6);
+        assertThat(result).hasSize(6);
     }
 
     @ParameterizedTest(name = ARGUMENTS_WITH_NAMES_PLACEHOLDER + " -> " + DISPLAY_NAME_PLACEHOLDER)
