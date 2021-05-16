@@ -18,9 +18,16 @@ public class StringSorterTest {
     }
 
     @ParameterizedTest(name = ARGUMENTS_WITH_NAMES_PLACEHOLDER + " -> " + DISPLAY_NAME_PLACEHOLDER)
-    @ValueSource(strings = {"a", "%", "1", "D", " "})
+    @ValueSource(strings = {"a", "%", "1", "D"})
     void shouldReturnInputWhenItIsSingleCharacter(String input) {
         var result = underTest.sort(input);
         assertThat(result).isEqualTo(input);
+    }
+
+    @ParameterizedTest(name = ARGUMENTS_WITH_NAMES_PLACEHOLDER + " -> " + DISPLAY_NAME_PLACEHOLDER)
+    @ValueSource(strings = {"", "    ", " "})
+    void shouldReturnEmptyStringWhenItIsBlank(String input) {
+        var result = underTest.sort(input);
+        assertThat(result).isEqualTo("");
     }
 }
