@@ -1,8 +1,6 @@
-package com.pittacode.anagrams.group;
+package com.pittacode.anagrams.group.helpers;
 
 import java.util.regex.Pattern;
-
-import static com.pittacode.anagrams.group.CharacterHelpers.characterCollector;
 
 public class StringSanitizer {
 
@@ -13,7 +11,7 @@ public class StringSanitizer {
     public String sanitize(String input) {
         var sanitizedString = input.codePoints()
                                    .mapToObj(i -> Character.isAlphabetic(i) ? (char) i : SPACE)
-                                   .collect(characterCollector());
+                                   .collect(CharacterHelpers.characterCollector());
         return normaliseSpace(sanitizedString);
     }
 

@@ -1,9 +1,8 @@
-package com.pittacode.anagrams.group;
+package com.pittacode.anagrams.group.helpers;
 
 import java.util.regex.Pattern;
-import java.util.stream.Collector;
 
-import static com.pittacode.anagrams.group.CharacterHelpers.characterCollector;
+import static com.pittacode.anagrams.group.helpers.CharacterHelpers.characterCollector;
 import static java.util.Objects.requireNonNull;
 
 public class StringCharacterSorter {
