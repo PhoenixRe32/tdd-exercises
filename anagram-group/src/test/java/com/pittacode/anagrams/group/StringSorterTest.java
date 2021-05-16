@@ -1,10 +1,12 @@
 package com.pittacode.anagrams.group;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_WITH_NAMES_PLACEHOLDER;
 import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
 
@@ -29,5 +31,10 @@ public class StringSorterTest {
     void shouldReturnEmptyStringWhenItIsBlank(String input) {
         var result = underTest.sort(input);
         assertThat(result).isEqualTo("");
+    }
+
+    @Test
+    void shouldNotAcceptNullInput() {
+        assertThatThrownBy(() -> underTest.sort(null));
     }
 }
