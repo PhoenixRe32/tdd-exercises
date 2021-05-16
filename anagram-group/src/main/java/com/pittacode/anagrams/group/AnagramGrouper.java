@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Supplier;
+
+import static java.util.stream.Collectors.toMap;
 
 public class AnagramGrouper {
 
@@ -16,26 +19,31 @@ public class AnagramGrouper {
         this.keyGenerator = keyGenerator;
     }
 
-    public Map<String, Collection<String>> group(String anagram) {
+    public Map<String, Collection<String>> group(String... anagram) {
         return group(Set.of(anagram));
     }
 
     public Map<String, Collection<String>> group(Collection<String> anagrams) {
-        Map<String, Collection<String>> groups = new HashMap<>();
-        for (var anagram : anagrams) {
-            var key = keyGenerator.generate(anagram);
-            if (groups.containsKey(key)) {
-                groups.get(key).add(anagram);
-            } else {
-                groups.put(key, initialiseAnagramGroup(anagram));
-            }
-        }
-        return groups;
+        return anagrams.stream()
+                       .map(this::convertToKeyValuePair)
+                       .collect(toMap(
+                               Map.Entry::getKey,
+                               this::getValueAsCollection,
+                               this::mergeValueCollectionsOfSameKeys,
+                               (Supplier<HashMap<String, Collection<String>>>) HashMap::new
+                       ));
     }
 
-    private Set<String> initialiseAnagramGroup(String anagram) {
-        var collectedAnagrams = new HashSet<String>();
-        collectedAnagrams.add(anagram);
-        return collectedAnagrams;
+    private Map.Entry<String, String> convertToKeyValuePair(String anagram) {
+        return Map.entry(keyGenerator.generate(anagram), anagram);
+    }
+
+    private HashSet<String> getValueAsCollection(Map.Entry<String, String> entry) {
+        return new HashSet<>(Set.of(entry.getValue()));
+    }
+
+    private Collection<String> mergeValueCollectionsOfSameKeys(Collection<String> v1, Collection<String> v2) {
+        v1.addAll(v2);
+        return v1;
     }
 }
