@@ -37,7 +37,7 @@ public class AnagramGrouperTest {
     }
 
     @Nested
-    @DisplayName("When multiple strings are passed that are anagrams of each other")
+    @DisplayName("When multiple strings are passed that are anagrams.txt of each other")
     class WhenMultipleStringOfSameAnagram {
 
         @BeforeEach
@@ -66,7 +66,7 @@ public class AnagramGrouperTest {
     }
 
     @Nested
-    @DisplayName("When multiple anagrams are passed")
+    @DisplayName("When multiple anagrams.txt are passed")
     class WhenMultipleAnagrams {
 
         @BeforeEach
