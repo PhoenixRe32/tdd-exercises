@@ -37,4 +37,10 @@ public class StringCharacterSorterTest {
     void shouldNotAcceptNullInput() {
         assertThatThrownBy(() -> underTest.sort(null));
     }
+
+    @Test
+    void shouldReturnStringWithSameNumberOfNonEmptyCharacters() {
+        var result = underTest.sort("aaa aaa");
+        assertThat(result.length()).isEqualTo(6);
+    }
 }

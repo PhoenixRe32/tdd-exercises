@@ -11,6 +11,10 @@ public class StringCharacterSorter {
             return "";
         }
 
-        return input;
+        return removeEmptySpace(input);
+    }
+
+    private String removeEmptySpace(String input) {
+        return input.replaceAll("\\s", "");
     }
 }
