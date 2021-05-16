@@ -10,13 +10,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_WITH_NAMES_PLACEHOLDER;
 import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
 
-public class StringSorterTest {
+public class StringCharacterSorterTest {
 
-    private StringSorter underTest;
+    private StringCharacterSorter underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new StringSorter();
+        underTest = new StringCharacterSorter();
     }
 
     @ParameterizedTest(name = ARGUMENTS_WITH_NAMES_PLACEHOLDER + " -> " + DISPLAY_NAME_PLACEHOLDER)

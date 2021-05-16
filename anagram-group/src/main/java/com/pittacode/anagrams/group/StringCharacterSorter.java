@@ -2,7 +2,7 @@ package com.pittacode.anagrams.group;
 
 import java.util.Objects;
 
-public class StringSorter {
+public class StringCharacterSorter {
 
     public String sort(String input) {
         Objects.requireNonNull(input, "Can't sort null values");
