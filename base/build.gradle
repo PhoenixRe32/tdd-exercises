@@ -1,9 +1,23 @@
 plugins {
-    id 'java'
+    id 'application'
+    id 'idea'
 }
 
 group 'com.pittacode'
 version '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+application {
+    mainClass = 'com.pittacode.Application'
+}
+
+run {
+    standardInput = System.in
+}
 
 repositories {
     mavenCentral()
@@ -18,8 +32,8 @@ dependencies {
 
     testImplementation 'org.assertj:assertj-core:3.18.1'
 
-    testCompile 'org.mockito:mockito-core:3.6.28'
-    testCompile 'org.mockito:mockito-junit-jupiter:3.6.28'
+    testCompileOnly 'org.mockito:mockito-core:3.6.28'
+    testCompileOnly 'org.mockito:mockito-junit-jupiter:3.6.28'
 }
 
 test {
